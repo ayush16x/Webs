@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OPX AI — From Pad to Planet™ | Oilfield Operations AI</title>
+  <meta name="description" content="OPX AI unifies Operations AI, Carbon Removal, and Workforce solutions to digitize oilfield operations, reduce emissions, and cut costs. Trusted by Chevron, ConocoPhillips, and Canadian Natural Resources.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:      #080808;
+      --yellow:     #FFD200;
+      --off-white:  #F4F3EE;
+      --dark-grey:  #111111;
+      --mid-grey:   #777777;
+      --silver:     #999999;
+      --charcoal:   #1A1A1A;
+      --arsenic:    #232323;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-inout: cubic-bezier(0.87, 0, 0.13, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--black);
+      color: var(--off-white);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+      transition: background .3s ease, border-color .3s ease;
+    }
+    .nav.scrolled {
+      background: rgba(8,8,8,.96);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0; }
+    .nav-logo-badge {
+      width: 46px; height: 46px; background: var(--yellow);
+      border-radius: 5px; display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-badge span { font-size: 12px; font-weight: 700; color: var(--black); letter-spacing: -.02em; }
+    .nav-logo-name {
+      padding: 0 14px; font-size: 15px; font-weight: 600;
+      color: var(--off-white); letter-spacing: -.02em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-link {
+      color: rgba(244,243,238,.65); text-decoration: none;
+      font-size: 14px; transition: color .2s;
+    }
+    .nav-link:hover { color: var(--off-white); }
+    .nav-item { position: relative; }
+    .nav-item > .nav-link {
+      display: flex; align-items: center; gap: 5px; cursor: pointer;
+    }
+    .nav-item > .nav-link::after {
+      content: ''; width: 0; height: 0;
+      border-left: 4px solid transparent; border-right: 4px solid transparent;
+      border-top: 4px solid currentColor; transition: transform .2s;
+    }
+    .nav-item:hover > .nav-link::after { transform: rotate(180deg); }
+    .dropdown {
+      position: absolute; top: calc(100% + 14px); left: 0;
+      background: var(--charcoal); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px; padding: 8px 0; min-width: 200px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all .22s var(--ease-out);
+    }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown a {
+      display: block; padding: 10px 16px; color: var(--silver);
+      text-decoration: none; font-size: 14px; transition: all .15s;
+    }
+    .dropdown a:hover { color: var(--off-white); background: rgba(255,255,255,.05); }
+    .nav-cta {
+      background: var(--yellow); color: var(--black); border: none;
+      padding: 0 20px; height: 38px; border-radius: 6px;
+      font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; position: relative; overflow: hidden;
+      transition: all .35s var(--ease-inout);
+    }
+    .nav-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--black); transform: translateX(-101%);
+      transition: transform .4s var(--ease-inout);
+    }
+    .nav-cta:hover::before { transform: translateX(0); }
+    .nav-cta span { position: relative; z-index: 1; transition: color .4s; }
+    .nav-cta:hover span { color: var(--yellow); }
+    .nav-burger {
+      display: none; width: 44px; height: 44px; background: var(--yellow);
+      border: none; border-radius: 5px; cursor: pointer;
+      flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    }
+    .nav-burger span { display: block; width: 20px; height: 2px; background: var(--black); transition: all .3s; }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: var(--black);
+      z-index: 99; padding: 80px 2rem 2rem; flex-direction: column; gap: 0;
+      overflow-y: auto;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-link {
+      display: block; color: var(--off-white); text-decoration: none;
+      font-size: clamp(1.8rem, 6vw, 2.5rem); font-weight: 300;
+      letter-spacing: -.03em; border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 1.2rem 0;
+    }
+    .mobile-link:hover { color: var(--yellow); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      position: relative; height: 100lvh; min-height: 620px;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(8,8,8,.3) 0%, transparent 35%, transparent 60%, var(--black) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 0 2.5rem; max-width: 920px; }
+    .hero-eyebrow {
+      font-size: 12px; font-weight: 500; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: 1.5rem;
+    }
+    .hero-h1 {
+      font-size: clamp(3.2rem, 7vw, 8rem); font-weight: 300;
+      letter-spacing: -.04em; line-height: 1.04; color: var(--off-white);
+      margin-bottom: 1.5rem;
+    }
+    .hero-h1 strong { font-weight: 600; }
+    .hero-sub {
+      font-size: clamp(1.1rem, 2vw, 1.45rem); font-weight: 300;
+      color: rgba(244,243,238,.65); max-width: 540px; line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--yellow); color: var(--black);
+      padding: 0 28px; height: 52px; border-radius: 8px;
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      border: none; cursor: pointer; position: relative; overflow: hidden;
+      transition: all .35s var(--ease-inout);
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--black); transform: translateX(-101%);
+      transition: transform .4s var(--ease-inout);
+    }
+    .btn-primary:hover::before { transform: translateX(0); }
+    .btn-primary > span { position: relative; z-index: 1; transition: color .4s; }
+    .btn-primary:hover > span { color: var(--yellow); }
+    .btn-ghost {
+      background: transparent; color: var(--off-white);
+      padding: 0 28px; height: 52px; border-radius: 8px;
+      font-size: 15px; font-weight: 400; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,.2); transition: all .25s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.05); }
+    .hero-float {
+      position: absolute; bottom: 9%; right: 4%; z-index: 2;
+      background: rgba(20,20,20,.88); backdrop-filter: blur(40px);
+      border: 1px solid rgba(255,255,255,.09); border-radius: 14px;
+      padding: 1.4rem 1.8rem; max-width: 270px;
+    }
+    .hero-float-tag {
+      font-size: 10px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: .5rem;
+    }
+    .hero-float-val {
+      font-size: 2.5rem; font-weight: 250; letter-spacing: -.05em;
+      color: var(--off-white); line-height: 1;
+    }
+    .hero-float-val em { font-size: 1.2rem; font-style: normal; }
+    .hero-float-sub { font-size: 12px; color: var(--mid-grey); margin-top: .4rem; }
+
+    /* ── SHARED LAYOUT ───────────────────────────────── */
+    section { padding: 7rem 2.5rem; }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .section-tag {
+      font-size: 11px; font-weight: 500; letter-spacing: .13em;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 300;
+      letter-spacing: -.04em; line-height: 1.08; color: var(--off-white);
+    }
+
+    /* ── OVERVIEW ────────────────────────────────────── */
+    .overview { background: var(--black); }
+    .overview-text {
+      font-size: clamp(1.35rem, 2.5vw, 2.1rem); font-weight: 300;
+      letter-spacing: -.02em; line-height: 1.45; color: var(--off-white);
+      max-width: 860px; margin-top: .6rem;
+    }
+    .overview-text strong { color: var(--yellow); font-weight: 500; }
+    .trust-row { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin-top: 3rem; }
+    .trust-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--mid-grey); }
+    .trust-names { display: flex; gap: 2.2rem; flex-wrap: wrap; align-items: center; }
+    .trust-name {
+      font-size: 14px; font-weight: 500; color: rgba(244,243,238,.28);
+      letter-spacing: -.01em; transition: color .2s;
+    }
+    .trust-name:hover { color: rgba(244,243,238,.65); }
+
+    /* ── SOLUTIONS ───────────────────────────────────── */
+    .solutions { background: var(--dark-grey); }
+    .solutions-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+    .sol-card {
+      background: var(--charcoal); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 18px; padding: 2.2rem; transition: all .3s var(--ease-out);
+      text-decoration: none; display: block; cursor: pointer;
+    }
+    .sol-card:hover { border-color: rgba(255,210,0,.28); transform: translateY(-5px); }
+    .sol-icon {
+      width: 50px; height: 50px; border-radius: 12px;
+      background: rgba(255,210,0,.1); display: flex; align-items: center;
+      justify-content: center; font-size: 24px; margin-bottom: 1.6rem;
+    }
+    .sol-tag {
+      font-size: 11px; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: .5rem;
+    }
+    .sol-name {
+      font-size: 1.35rem; font-weight: 500; letter-spacing: -.02em;
+      color: var(--off-white); margin-bottom: .8rem; line-height: 1.25;
+    }
+    .sol-desc { font-size: 13.5px; color: var(--mid-grey); line-height: 1.65; margin-bottom: 1.6rem; }
+    .sol-features { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .sol-features li {
+      font-size: 13px; color: var(--silver);
+      display: flex; align-items: center; gap: .55rem;
+    }
+    .sol-features li::before {
+      content: ''; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--yellow); flex-shrink: 0;
+    }
+
+    /* ── TECHNOLOGY PILLARS ──────────────────────────── */
+    .technology { background: var(--black); }
+    .tech-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      margin-top: 3rem; border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.07);
+      background: rgba(255,255,255,.04);
+      gap: 1px;
+    }
+    .tech-cell {
+      background: var(--dark-grey); padding: 2.6rem 2rem;
+      transition: background .3s;
+    }
+    .tech-cell:hover { background: var(--charcoal); }
+    .tech-num {
+      font-size: 4rem; font-weight: 250; letter-spacing: -.06em;
+      color: rgba(244,243,238,.1); line-height: 1; margin-bottom: 1.6rem;
+    }
+    .tech-name { font-size: 1rem; font-weight: 500; color: var(--off-white); margin-bottom: .7rem; line-height: 1.3; }
+    .tech-desc { font-size: 13px; color: var(--mid-grey); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ────────────────────────────────── */
+    .how { background: var(--charcoal); }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; margin-top: 3rem; }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--arsenic); border: 1px solid rgba(255,210,0,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 500; color: var(--yellow); margin-bottom: 1.5rem;
+    }
+    .step-name { font-size: 1.1rem; font-weight: 500; color: var(--off-white); margin-bottom: .7rem; }
+    .step-desc { font-size: 14px; color: var(--mid-grey); line-height: 1.65; }
+
+    /* ── METRICS ─────────────────────────────────────── */
+    .metrics { background: var(--arsenic); padding: 5rem 2.5rem; }
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(5,1fr);
+      gap: 0; border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px; overflow: hidden;
+    }
+    .metric {
+      padding: 2.8rem 2rem; text-align: center;
+      border-right: 1px solid rgba(255,255,255,.06);
+    }
+    .metric:last-child { border-right: none; }
+    .metric-val {
+      font-size: clamp(2.2rem, 4vw, 4rem); font-weight: 250;
+      letter-spacing: -.06em; color: var(--off-white); line-height: 1; margin-bottom: .55rem;
+    }
+    .metric-val span { color: var(--yellow); }
+    .metric-lbl { font-size: 12px; color: var(--mid-grey); line-height: 1.45; }
+
+    /* ── INSIGHTS ────────────────────────────────────── */
+    .insights { background: var(--dark-grey); }
+    .insights-head {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .insights-all {
+      color: var(--yellow); text-decoration: none; font-size: 14px;
+      font-weight: 500; display: flex; align-items: center; gap: 6px;
+      transition: gap .2s;
+    }
+    .insights-all:hover { gap: 12px; }
+    .insights-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem;
+    }
+    .insight-card {
+      background: var(--charcoal); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px; overflow: hidden; text-decoration: none; display: block;
+      transition: all .3s var(--ease-out);
+    }
+    .insight-card:hover { border-color: rgba(255,210,0,.2); transform: translateY(-4px); }
+    .insight-thumb {
+      width: 100%; aspect-ratio: 16/9; background: var(--arsenic);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; overflow: hidden;
+    }
+    .insight-body { padding: 1.4rem 1.5rem; }
+    .insight-date { font-size: 11px; color: var(--mid-grey); margin-bottom: .55rem; }
+    .insight-title {
+      font-size: .95rem; font-weight: 500; color: var(--off-white);
+      line-height: 1.4; margin-bottom: .6rem; letter-spacing: -.01em;
+    }
+    .insight-excerpt { font-size: 12.5px; color: var(--mid-grey); line-height: 1.55; }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    .contact { background: var(--black); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .contact-h2 {
+      font-size: clamp(2.5rem, 5vw, 5.5rem); font-weight: 300;
+      letter-spacing: -.05em; line-height: 1.04; color: var(--off-white); margin-bottom: 1.5rem;
+    }
+    .contact-h2 em { font-style: italic; color: var(--yellow); }
+    .contact-desc { font-size: 15px; color: var(--mid-grey); line-height: 1.7; margin-bottom: 2.2rem; }
+    .contact-info { display: flex; flex-direction: column; gap: .9rem; }
+    .cinfo {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: 14px; color: var(--silver);
+    }
+    .cinfo a { color: var(--silver); text-decoration: none; transition: color .2s; }
+    .cinfo a:hover { color: var(--yellow); }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .45rem; }
+    .form-lbl {
+      font-size: 11px; font-weight: 500; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--mid-grey);
+    }
+    .form-ctrl {
+      background: var(--charcoal); border: 1px solid rgba(255,255,255,.09);
+      border-radius: 8px; padding: 14px 16px; color: var(--off-white);
+      font-family: inherit; font-size: 15px; outline: none;
+      transition: border-color .2s; width: 100%;
+    }
+    .form-ctrl:focus { border-color: var(--yellow); }
+    .form-ctrl::placeholder { color: rgba(244,243,238,.22); }
+    textarea.form-ctrl { resize: vertical; min-height: 120px; }
+    select.form-ctrl {
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center;
+    }
+    select.form-ctrl option { background: var(--charcoal); }
+    .form-check { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+    .form-check input { accent-color: var(--yellow); margin-top: 3px; flex-shrink: 0; }
+    .form-check span { font-size: 12px; color: var(--mid-grey); line-height: 1.5; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer { background: var(--black); position: relative; overflow: hidden; }
+    .footer-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 72px 72px;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.4) 15%, rgba(0,0,0,.4) 85%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.4) 15%, rgba(0,0,0,.4) 85%, transparent 100%);
+    }
+    .footer-inner { position: relative; z-index: 1; padding: 5rem 2.5rem 3rem; max-width: 1280px; margin: 0 auto; }
+    .footer-cta-box {
+      background: var(--yellow); border-radius: 18px;
+      padding: 3rem 3.5rem; display: flex;
+      justify-content: space-between; align-items: center;
+      gap: 2rem; margin-bottom: 4.5rem;
+    }
+    .footer-cta-left h3 {
+      font-size: clamp(1.5rem, 3vw, 2.8rem); font-weight: 600;
+      letter-spacing: -.04em; color: var(--black); line-height: 1.1; margin-bottom: .4rem;
+    }
+    .footer-cta-left p { font-size: 14px; color: rgba(0,0,0,.55); }
+    .btn-dark {
+      background: var(--black); color: var(--yellow);
+      padding: 0 30px; height: 50px; border-radius: 8px;
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background .2s; flex-shrink: 0; white-space: nowrap;
+    }
+    .btn-dark:hover { background: #1a1a1a; }
+    .footer-cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
+    .footer-brand-col h4 {
+      font-size: 1rem; font-weight: 600; letter-spacing: -.02em;
+      color: var(--off-white); margin-bottom: .8rem;
+    }
+    .footer-brand-col p {
+      font-size: 13px; color: var(--mid-grey); line-height: 1.65;
+      max-width: 270px; margin-bottom: 1.5rem;
+    }
+    .socials { display: flex; gap: .75rem; }
+    .social-btn {
+      width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.1);
+      border-radius: 7px; display: flex; align-items: center; justify-content: center;
+      color: var(--mid-grey); text-decoration: none; font-size: 13px; font-weight: 600;
+      transition: all .2s;
+    }
+    .social-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+    .footer-col h5 {
+      font-size: 11px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--mid-grey); margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .footer-col ul li a {
+      color: rgba(244,243,238,.45); text-decoration: none; font-size: 14px; transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--off-white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { font-size: 13px; color: var(--mid-grey); }
+    .footer-legal { display: flex; gap: 1.5rem; }
+    .footer-legal a { font-size: 13px; color: var(--mid-grey); text-decoration: none; transition: color .2s; }
+    .footer-legal a:hover { color: var(--off-white); }
+
+    /* ── SCROLL ANIMATIONS ───────────────────────────── */
+    .fade { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+    .fade.in { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .tech-grid { grid-template-columns: repeat(2,1fr); }
+      .metrics-grid { grid-template-columns: repeat(3,1fr); }
+      .metrics-grid .metric:nth-child(3) { border-right: none; }
+    }
+    @media (max-width: 900px) {
+      .footer-cols { grid-template-columns: 1fr 1fr; }
+      .footer-cta-box { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 834px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .solutions-grid, .insights-grid, .steps, .contact-grid { grid-template-columns: 1fr; }
+      .contact-grid { gap: 3rem; }
+      .hero-float { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: repeat(2,1fr); }
+      .metrics-grid .metric { border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+      .metrics-grid .metric:last-child { border-bottom: none; }
+      section { padding: 4.5rem 1.5rem; }
+      .footer-inner { padding: 3.5rem 1.5rem 2rem; }
+    }
+    @media (max-width: 520px) {
+      .footer-cols { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .metrics-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ─────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-badge"><span>OPX</span></div>
+    <span class="nav-logo-name">OPX AI</span>
+  </a>
+
+  <ul class="nav-links">
+    <li class="nav-item">
+      <span class="nav-link">Solutions</span>
+      <div class="dropdown">
+        <a href="#solutions">Buddy AI</a>
+        <a href="#solutions">IOCaaS</a>
+        <a href="#solutions">CARBiN</a>
+        <a href="#solutions">FieldIQ</a>
+        <a href="#solutions">Pad-in-a-Box</a>
+        <a href="#solutions">OPX AI Learning</a>
+      </div>
+    </li>
+    <li><a href="#technology" class="nav-link">Services</a></li>
+    <li><a href="#how" class="nav-link">How It Works</a></li>
+    <li><a href="#insights" class="nav-link">Insights</a></li>
+    <li><a href="#contact" class="nav-link">About</a></li>
+  </ul>
+
+  <a href="#contact" class="nav-cta"><span>Book Demo</span></a>
+  <button class="nav-burger" id="burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE MENU ────────────────────────────────────── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" class="mobile-link" onclick="closeMobile()">Home</a>
+  <a href="#solutions" class="mobile-link" onclick="closeMobile()">Solutions</a>
+  <a href="#technology" class="mobile-link" onclick="closeMobile()">Services</a>
+  <a href="#how" class="mobile-link" onclick="closeMobile()">How It Works</a>
+  <a href="#insights" class="mobile-link" onclick="closeMobile()">Insights</a>
+  <a href="#contact" class="mobile-link" onclick="closeMobile()">Book Demo</a>
+</div>
+
+<!-- ── HERO ───────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Built by Operators, For Operators</p>
+    <h1 class="hero-h1">
+      <strong>From Pad<br>to Planet™</strong>
+    </h1>
+    <p class="hero-sub">One interoperable ecosystem to digitize operations, decarbonize industry, and democratize AI across oil &amp; gas.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary"><span>Book a 20-min Demo</span></a>
+      <a href="#solutions" class="btn-ghost">Explore Solutions →</a>
+    </div>
+  </div>
+
+  <div class="hero-float">
+    <div class="hero-float-tag">Go-Live Speed</div>
+    <div class="hero-float-val">6<em> wks</em></div>
+    <div class="hero-float-sub">Pilot to live IOC — no CapEx required</div>
+  </div>
+</section>
+
+<!-- ── OVERVIEW ───────────────────────────────────────── -->
+<section class="overview">
+  <div class="container">
+    <div class="fade">
+      <p class="section-tag">Who We Are</p>
+      <p class="overview-text">
+        OPX AI unifies <strong>Operations AI</strong> (Buddy, FieldIQ, IOCaaS),
+        <strong>Carbon Removal</strong> (CARBiN), and a workforce engine
+        (<strong>Operators of the Future</strong>) — so producers can lift
+        production, cut LOE, reduce methane &amp; CO₂, and upskill the next
+        generation of operators.
+      </p>
+      <div class="trust-row">
+        <span class="trust-label">Trusted By</span>
+        <div class="trust-names">
+          <span class="trust-name">Chevron</span>
+          <span class="trust-name">ConocoPhillips</span>
+          <span class="trust-name">Canadian Natural Resources</span>
+          <span class="trust-name">Vale</span>
+          <span class="trust-name">Mosaic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOLUTIONS ──────────────────────────────────────── -->
+<section class="solutions" id="solutions">
+  <div class="container">
+    <div class="fade">
+      <p class="section-tag">Our Solutions</p>
+      <h2 class="section-title">Operate Smarter.<br>Emit Less. Prove Impact.</h2>
+    </div>
+
+    <div class="solutions-grid">
+      <a href="#contact" class="sol-card fade" style="transition-delay:.05s">
+        <div class="sol-icon">⚡</div>
+        <div class="sol-tag">Operations AI</div>
+        <h3 class="sol-name">IOCaaS + Buddy AI + FieldIQ</h3>
+        <p class="sol-desc">From reactive firefighting to proactive production. Unifies 24/7 AI + human surveillance, anomaly detection, and predictive workflows across your entire well portfolio — no rip-and-replace required.</p>
+        <ul class="sol-features">
+          <li>Exception-driven operations</li>
+          <li>Artificial lift optimization</li>
+          <li>Compression &amp; flow assurance</li>
+          <li>Shift logs &amp; KPI dashboards</li>
+          <li>Works with existing PI/SCADA</li>
+        </ul>
+      </a>
+
+      <a href="#contact" class="sol-card fade" style="transition-delay:.12s">
+        <div class="sol-icon">🌿</div>
+        <div class="sol-tag">Carbon Removal AI</div>
+        <h3 class="sol-name">CARBiN Direct Air Capture</h3>
+        <p class="sol-desc">Capture CO₂ where people are and prove the impact. Modular DAC units with built-in MRV telemetry — Houston manufactured, rapidly deployable, with impact advertising revenue streams.</p>
+        <ul class="sol-features">
+          <li>Modular &amp; grid-ready units</li>
+          <li>MRV telemetry built-in</li>
+          <li>Impact advertising revenue</li>
+          <li>Methane verification (Pad-in-a-Box)</li>
+          <li>Audit-ready emissions proof</li>
+        </ul>
+      </a>
+
+      <a href="#contact" class="sol-card fade" style="transition-delay:.2s">
+        <div class="sol-icon">🎓</div>
+        <div class="sol-tag">Workforce AI</div>
+        <h3 class="sol-name">Operators of the Future</h3>
+        <p class="sol-desc">Train operators who think like optimizers. Texas-based 6-month immersive program producing AI-fluent "Unicorn Operators" trained on SCADA/PLC, artificial lift, and production optimization.</p>
+        <ul class="sol-features">
+          <li>AI-fluent field talent</li>
+          <li>SCADA/PI &amp; artificial lift training</li>
+          <li>Production optimization</li>
+          <li>Immediate deployment ready</li>
+          <li>1,500 operators within 12 months</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TECHNOLOGY PILLARS ──────────────────────────────── -->
+<section class="technology" id="technology">
+  <div class="container">
+    <div class="fade">
+      <p class="section-tag">Why OPX AI</p>
+      <h2 class="section-title">Intelligence that actually<br>works in the field.</h2>
+    </div>
+    <div class="tech-grid fade">
+      <div class="tech-cell">
+        <div class="tech-num">01</div>
+        <h3 class="tech-name">Zero Disruption Integration</h3>
+        <p class="tech-desc">Plugs directly into existing PI, Ignition, ClearSCADA, Seeq, and Cygnet systems. No rip-and-replace. No CapEx. Delivered as a service — live in 6 weeks.</p>
+      </div>
+      <div class="tech-cell">
+        <div class="tech-num">02</div>
+        <h3 class="tech-name">On-Premise Security</h3>
+        <p class="tech-desc">All processing runs inside your firewall. No data leaves your network. Your cloud, your VPN, your governance — full data custody always maintained.</p>
+      </div>
+      <div class="tech-cell">
+        <div class="tech-num">03</div>
+        <h3 class="tech-name">Field-Born AI Models</h3>
+        <p class="tech-desc">Anomaly detection models trained on Chevron and ConocoPhillips operational data. Physics + ML artificial lift models grounded in real oilfield conditions.</p>
+      </div>
+      <div class="tech-cell">
+        <div class="tech-num">04</div>
+        <h3 class="tech-name">Verified Results in 90 Days</h3>
+        <p class="tech-desc">Audit-ready methane proof, real-time MVR reports, LOE and BOE tracking. Quick wins in weeks — full ROI demonstration inside the 90-day pilot window.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ────────────────────────────────────── -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="fade">
+      <p class="section-tag">The Process</p>
+      <h2 class="section-title">Live in weeks,<br>not months.</h2>
+    </div>
+    <div class="steps fade">
+      <div>
+        <div class="step-num">1</div>
+        <h3 class="step-name">Connect</h3>
+        <p class="step-desc">Securely plug in your SCADA, PI, field apps, and historians. No data leaves your network. We map your tags, rationalize alarms, and establish baseline KPIs within the first two weeks.</p>
+      </div>
+      <div>
+        <div class="step-num">2</div>
+        <h3 class="step-name">Surface</h3>
+        <p class="step-desc">Buddy AI turns thousands of signals into clear advisories and prioritized exceptions — no noise, just next best actions. IOCaaS deploys 24/7 AI + human surveillance across 100–150 wells in weeks 3–12.</p>
+      </div>
+      <div>
+        <div class="step-num">3</div>
+        <h3 class="step-name">Act &amp; Prove</h3>
+        <p class="step-desc">FieldIQ logs every action and feedback loop. IOCaaS verifies LOE reduction and BOE lift. Pad-in-a-Box delivers audit-ready methane evidence. Scale across pads and basins post-90 days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── METRICS ─────────────────────────────────────────── -->
+<section class="metrics">
+  <div class="container">
+    <div class="metrics-grid fade">
+      <div class="metric">
+        <div class="metric-val"><span>20–30</span>%</div>
+        <div class="metric-lbl">Fewer truck rolls<br>LOE reduction in 90 days</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val"><span>2–5</span>%</div>
+        <div class="metric-lbl">Production lift<br>BOE increase</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val"><span>3</span>×</div>
+        <div class="metric-lbl">Faster event resolution<br>alarm to action</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val"><span>150</span>+</div>
+        <div class="metric-lbl">Wells per specialist<br>with alarm normalization</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val"><span style="font-size:2rem">6 </span><span style="font-size:1.4rem">wk</span></div>
+        <div class="metric-lbl">Pilot to live IOC<br>no CapEx required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INSIGHTS ───────────────────────────────────────── -->
+<section class="insights" id="insights">
+  <div class="container">
+    <div class="insights-head fade">
+      <div>
+        <p class="section-tag">Insights</p>
+        <h2 class="section-title">Field-tested playbooks<br>for real operators.</h2>
+      </div>
+      <a href="https://www.opxai.com/insights/" target="_blank" class="insights-all">All Insights →</a>
+    </div>
+
+    <div class="insights-grid fade">
+      <a href="https://www.opxai.com/texas-oil-and-gas-freeze-offs/" target="_blank" class="insight-card">
+        <div class="insight-thumb">🌨️</div>
+        <div class="insight-body">
+          <p class="insight-date">Jan 26, 2026 · Jai Joon</p>
+          <h3 class="insight-title">Texas Is Freezing Solid. Are Your Wells About to Freeze Off Too?</h3>
+          <p class="insight-excerpt">Hydrates don't announce themselves — OPX AI anomaly detection catches formation hours before a freeze-off event.</p>
+        </div>
+      </a>
+
+      <a href="https://www.opxai.com/beyond-the-hype-making-a-dent-with-ai-in-oil-gas/" target="_blank" class="insight-card">
+        <div class="insight-thumb">🤖</div>
+        <div class="insight-body">
+          <p class="insight-date">Jan 13, 2026 · Jai Joon</p>
+          <h3 class="insight-title">Beyond the Hype: Making a Dent with AI in Oil &amp; Gas</h3>
+          <p class="insight-excerpt">95% of enterprise AI pilots achieve limited impact. Here's why OPX AI is in the 5% — and what that means for your operations.</p>
+        </div>
+      </a>
+
+      <a href="https://www.opxai.com/ma-chaos-in-the-oilfield-when-reorgs-become-operational-hazards/" target="_blank" class="insight-card">
+        <div class="insight-thumb">⚠️</div>
+        <div class="insight-body">
+          <p class="insight-date">Dec 10, 2025 · Jai Joon</p>
+          <h3 class="insight-title">M&amp;A Chaos in the Oilfield: When Reorgs Become Operational Hazards</h3>
+          <p class="insight-excerpt">US energy merger spending hit $206.6B in 2024. Post-merger ops chaos is where OPX AI deploys fastest — 90 days to live.</p>
+        </div>
+      </a>
+
+      <a href="https://www.opxai.com/at-the-breaking-point-the-brutal-reality-of-oilfield-operations-in-2025/" target="_blank" class="insight-card">
+        <div class="insight-thumb">📊</div>
+        <div class="insight-body">
+          <p class="insight-date">Dec 2, 2025 · Jai Joon</p>
+          <h3 class="insight-title">At the Breaking Point: The Brutal Reality of Oilfield Operations in 2025</h3>
+          <p class="insight-excerpt">50+ daily alarms per operator. $149M average annual losses. The data behind why oilfield ops are at a breaking point.</p>
+        </div>
+      </a>
+
+      <a href="https://www.opxai.com/why-the-oilfield-needs-operators-of-the-future/" target="_blank" class="insight-card">
+        <div class="insight-thumb">🎯</div>
+        <div class="insight-body">
+          <p class="insight-date">Oct 23, 2025 · Deepanshu Singh</p>
+          <h3 class="insight-title">Why the Oilfield Needs Operators of the Future</h3>
+          <p class="insight-excerpt">1,500 trained operators within 12 months. OPX AI Learning builds AI-fluent field talent on live oilfield challenges.</p>
+        </div>
+      </a>
+
+      <a href="https://www.opxai.com/the-future-of-ai-in-og-is-invisible/" target="_blank" class="insight-card">
+        <div class="insight-thumb">🔮</div>
+        <div class="insight-body">
+          <p class="insight-date">Sep 5, 2025 · Jai Joon</p>
+          <h3 class="insight-title">The Future of AI in O&amp;G Is Invisible</h3>
+          <p class="insight-excerpt">20% chemical savings, 10–20% fuel cost reductions. The best AI doesn't announce itself — IOCaaS as invisible infrastructure.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ─────────────────────────────────────────── -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="fade">
+        <h2 class="contact-h2">Let's <em>operate</em><br>smarter.</h2>
+        <p class="contact-desc">Energy operations are complex. Reaching our team isn't. Whether it's production optimization, emissions reduction, or integrating AI into existing systems — our engineers respond within 2 business days with a tailored approach.</p>
+        <div class="contact-info">
+          <div class="cinfo">📍 <span>Houston, TX &nbsp;·&nbsp; Calgary, AB &nbsp;·&nbsp; India</span></div>
+          <div class="cinfo">✉️ <a href="mailto:info@opxai.com">info@opxai.com</a></div>
+          <div class="cinfo">🎓 <a href="mailto:learning@opxai.com">learning@opxai.com</a></div>
+          <div class="cinfo">🗓️ <a href="https://outlook.office.com/book/OPXAi@opxai.com/" target="_blank">Book a 20-min Demo</a></div>
+        </div>
+      </div>
+
+      <form class="contact-form fade" onsubmit="handleSubmit(event)" style="transition-delay:.1s">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-lbl">Name *</label>
+            <input type="text" class="form-ctrl" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Phone *</label>
+            <input type="tel" class="form-ctrl" placeholder="+1 (555) 000-0000" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">Email *</label>
+          <input type="email" class="form-ctrl" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">Inquiry Type</label>
+          <select class="form-ctrl">
+            <option value="">Select your interest...</option>
+            <option>IOCaaS / Operations AI</option>
+            <option>Buddy AI / FieldIQ</option>
+            <option>CARBiN Carbon Removal</option>
+            <option>Operators of the Future Program</option>
+            <option>Pad-in-a-Box / Methane MVR</option>
+            <option>Rate My Ops Assessment</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">Message *</label>
+          <textarea class="form-ctrl" placeholder="Tell us about your operations, challenges, and what you'd like to achieve..." required></textarea>
+        </div>
+        <label class="form-check">
+          <input type="checkbox" required>
+          <span>I consent to OPX AI storing and processing my data to respond to this inquiry.</span>
+        </label>
+        <div>
+          <button type="submit" class="btn-primary" id="form-btn"><span>Send Message →</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────── -->
+<footer>
+  <div class="footer-bg"></div>
+  <div class="footer-inner">
+
+    <div class="footer-cta-box">
+      <div class="footer-cta-left">
+        <h3>Operate Smarter.<br>Emit Less. Prove Impact.</h3>
+        <p>Book a 20-min demo — no sales pitch, just straight talk and real results.</p>
+      </div>
+      <a href="https://outlook.office.com/book/OPXAi@opxai.com/" target="_blank" class="btn-dark">Book Demo →</a>
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-brand-col">
+        <h4>OPX AI</h4>
+        <p>Built by operators, for operators. Field-first AI that delivers fewer alarms, better uptime, and measurable impact across the entire oilfield.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/company/opxai" target="_blank" class="social-btn" title="LinkedIn">in</a>
+          <a href="https://twitter.com/opxai" target="_blank" class="social-btn" title="Twitter/X">𝕏</a>
+          <a href="https://www.youtube.com/@opxai" target="_blank" class="social-btn" title="YouTube">▶</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="https://www.opxai.com/ioc/" target="_blank">IOCaaS</a></li>
+          <li><a href="https://www.opxai.com/buddy/" target="_blank">Buddy AI</a></li>
+          <li><a href="https://www.opxai.com/buddy/" target="_blank">FieldIQ</a></li>
+          <li><a href="https://www.opxai.com/products/" target="_blank">CARBiN</a></li>
+          <li><a href="https://www.opxai.com/products/" target="_blank">Pad-in-a-Box</a></li>
+          <li><a href="https://learning.opxai.com" target="_blank">OPX AI Learning</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="https://www.opxai.com/services/" target="_blank">Hire Our Experts</a></li>
+          <li><a href="https://www.opxai.com/services/" target="_blank">IOC Stand-Up</a></li>
+          <li><a href="https://www.opxai.com/services/" target="_blank">SCADA/PI Health Check</a></li>
+          <li><a href="https://www.opxai.com/services/" target="_blank">Change Management</a></li>
+          <li><a href="https://www.opxai.com/ioc-score/" target="_blank">Rate My Ops</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="https://www.opxai.com/about/" target="_blank">About Us</a></li>
+          <li><a href="https://www.opxai.com/insights/" target="_blank">Insights</a></li>
+          <li><a href="https://www.opxai.com/contact/" target="_blank">Contact</a></li>
+          <li><a href="https://www.opxai.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 OPX AI INC. &nbsp;·&nbsp; Houston, TX &nbsp;·&nbsp; Calgary, AB &nbsp;·&nbsp; All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="https://www.opxai.com/privacy-policy/" target="_blank">Privacy Policy</a>
+        <a href="https://www.opxai.com/contact/" target="_blank">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ─────────────────────────────────────────── -->
+<script>
+  /* ── HERO CANVAS ───────────────────────────── */
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let nodes = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function initNodes() {
+    nodes = [];
+    const count = Math.min(120, Math.floor((canvas.width * canvas.height) / 10000));
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - .5) * .35,
+        vy: (Math.random() - .5) * .35,
+        r: Math.random() * 1.6 + .4,
+        a: Math.random() * .55 + .15
+      });
+    }
+  }
+
+  function drawFrame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#080808';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 140) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255,210,0,${(1 - d/140) * .12})`;
+          ctx.lineWidth = .6;
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,210,0,${n.a})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(drawFrame);
+  }
+
+  resize(); initNodes(); drawFrame();
+  window.addEventListener('resize', () => { resize(); initNodes(); });
+
+  /* ── NAV SCROLL ────────────────────────────── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── MOBILE MENU ───────────────────────────── */
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let open = false;
+
+  burger.addEventListener('click', () => {
+    open = !open;
+    mobileMenu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    burger.setAttribute('aria-expanded', open);
+  });
+
+  function closeMobile() {
+    open = false;
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ── SCROLL REVEAL ─────────────────────────── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: .1 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+  /* ── CONTACT FORM ──────────────────────────── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('form-btn');
+    btn.querySelector('span').textContent = 'Message Sent ✓';
+    btn.style.background = '#22c55e';
+    setTimeout(() => {
+      btn.querySelector('span').textContent = 'Send Message →';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3500);
+  }
+
+  /* ── SMOOTH SCROLL ─────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); closeMobile(); }
+    });
+  });
+</script>
+</body>
+</html>
