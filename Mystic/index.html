@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en" class="smooth-scroll-active">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mystic Matt Young | Spiritual Healer, Intuitive Reader & International Speaker</title>
+  <meta name="description" content="International Speaker, Healer, Oracle & Author specializing in spiritual technology, intuitive readings, and miracle healings." />
+
+  <!-- Google Fonts: Manrope + Cormorant Garamond (Skyfire alternative) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===================================================
+       DESIGN TOKENS — mirror of collectifparcelles.com
+       =================================================== */
+    :root {
+      --color-black:          #1e1e1b;
+      --color-white:          #faf8f4;
+      --color-light-grey:     #9d9d9d;
+      --color-grey:           #8d8d8d;
+      --color-light-blue-grey:#c9ead9;
+      --color-pink:           #fea5b5;
+      --color-light-pink:     #ffdae1;
+      --color-tan:            #fbf49c;
+      --color-light-tan:      #faf4aa;
+      --color-dark-teal:      #02484f;
+      --color-dark-slate-blue:#1a3d59;
+      --color-greyish-brown:  #54423c;
+
+      --font-family-title: "Cormorant Garamond", Georgia, serif;
+      --font-family-base:  "Manrope", system-ui, sans-serif;
+
+      --space-xs:   5px;
+      --space-s:    10px;
+      --space-m:    30px;
+      --space-l:    50px;
+      --space-xl:   60px;
+      --space-2xl:  100px;
+      --space-3xl:  150px;
+      --space-4xl:  200px;
+      --space-5xl:  250px;
+
+      --nav-height-desktop: 100px;
+      --nav-height-mobile:  130px;
+      --footer-height:      124px;
+
+      --bp-mobile:   320px;
+      --bp-tablet:   768px;
+      --bp-laptop:   1024px;
+      --bp-desktop:  1440px;
+    }
+
+    /* ===================================================
+       RESET & BASE
+       =================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      background-color: var(--color-white);
+      color: var(--color-black);
+    }
+
+    body {
+      font-family: var(--font-family-base);
+      font-weight: 400;
+      line-height: 1.67;
+      background-color: var(--color-white);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul, ol { list-style: none; }
+
+    /* ===================================================
+       SKIP LINKS (accessibility)
+       =================================================== */
+    .skiplinks {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 1001;
+      display: flex;
+      gap: var(--space-s);
+      padding: var(--space-xs);
+    }
+    .skiplinks__link {
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--color-black);
+      color: var(--color-white);
+      font-family: var(--font-family-base);
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 3px;
+      transform: translateY(-100%);
+      transition: transform .2s ease, background-color .2s ease;
+    }
+    .skiplinks__link:focus {
+      transform: translateY(0);
+      outline: 2px solid var(--color-dark-teal);
+      outline-offset: 2px;
+    }
+
+    /* ===================================================
+       PAGE LAYOUT — 16-col grid → 22-col on landscape tablet+
+       =================================================== */
+    #page-home {
+      display: grid;
+      grid-template-columns: repeat(16, 1fr);
+      min-height: 100vh;
+    }
+
+    #home-left-rail {
+      display: none;
+      grid-column: 1 / 3;
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      padding: var(--space-3xl) var(--space-m) var(--space-m);
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    #home-content {
+      grid-column: 1 / -1;
+    }
+
+    @media (min-width: 768px) and (orientation: landscape) {
+      #page-home {
+        grid-template-columns: repeat(22, 1fr);
+      }
+      #home-left-rail {
+        display: flex;
+        grid-column: 1 / 3;
+      }
+      #home-content {
+        grid-column: 3 / -1;
+      }
+    }
+
+    /* Left rail nav */
+    .left-rail__nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    .left-rail__link {
+      font-family: var(--font-family-base);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-light-grey);
+      transition: color .2s ease;
+      white-space: nowrap;
+    }
+    .left-rail__link:hover { color: var(--color-black); }
+    .left-rail__logo {
+      font-family: var(--font-family-title);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--color-black);
+      margin-bottom: var(--space-l);
+    }
+
+    /* ===================================================
+       TYPOGRAPHY CLASSES
+       =================================================== */
+    .typo-hero-title {
+      font-family: var(--font-family-title);
+      font-size: clamp(2.8rem, 8vw, 6.25rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .typo-hero-subtitle {
+      font-family: var(--font-family-base);
+      font-size: clamp(1.1rem, 2.5vw, 2rem);
+      font-weight: 300;
+      line-height: 1.3;
+    }
+    .typo-section-title {
+      font-family: var(--font-family-title);
+      font-size: clamp(2.5rem, 5vw, 4.375rem);
+      font-weight: 500;
+      line-height: 1.15;
+    }
+    .typo-section-desc-xl {
+      font-family: var(--font-family-base);
+      font-size: clamp(1.25rem, 2vw, 1.875rem);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+    .typo-section-desc-lg {
+      font-family: var(--font-family-base);
+      font-size: clamp(1rem, 1.5vw, 1.375rem);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .typo-section-desc {
+      font-family: var(--font-family-base);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.75;
+    }
+    .typo-block-title {
+      font-family: var(--font-family-base);
+      font-size: clamp(1rem, 1.5vw, 1.375rem);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .typo-body {
+      font-family: var(--font-family-base);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      line-height: 1.67;
+    }
+    .typo-body-sm {
+      font-family: var(--font-family-base);
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .typo-label {
+      font-family: var(--font-family-base);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-light-grey);
+    }
+
+    /* ===================================================
+       SECTION SHARED STYLES
+       =================================================== */
+    section {
+      padding: var(--space-4xl) var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: var(--space-3xl) var(--space-m);
+      }
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: block;
+      margin-bottom: var(--space-m);
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--color-black);
+      margin: var(--space-m) 0;
+    }
+
+    /* ===================================================
+       HERO SECTION
+       =================================================== */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      overflow: hidden;
+      background-color: var(--color-black);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://img1.wsimg.com/isteam/ip/73a0fb88-2002-417e-8512-b078afc28087/IMG_5921.jpg');
+      background-size: cover;
+      background-position: center 20%;
+      opacity: 0.45;
+      filter: grayscale(15%);
+    }
+
+    /* Fixed centered logo (matches collectifparcelles pattern) */
+    .hero-logo-fixed {
+      position: absolute;
+      top: var(--space-l);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      text-align: center;
+    }
+    .hero-logo-fixed span {
+      font-family: var(--font-family-title);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      opacity: 0.75;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: var(--space-5xl) var(--space-2xl) var(--space-4xl);
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: var(--space-4xl) var(--space-m) var(--space-3xl);
+      }
+    }
+
+    .hero-content .typo-hero-title {
+      color: var(--color-white);
+      max-width: 900px;
+      margin-bottom: var(--space-m);
+    }
+
+    .hero-content .typo-hero-subtitle {
+      color: rgba(250,248,244,0.75);
+      max-width: 600px;
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: var(--space-s);
+      color: rgba(250,248,244,0.5);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-hint::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: rgba(250,248,244,0.5);
+    }
+
+    /* ===================================================
+       INTRO / TAGLINE SECTION
+       =================================================== */
+    #intro {
+      background-color: var(--color-white);
+      border-bottom: 1px solid rgba(30,30,27,0.08);
+    }
+    #intro .section-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      #intro .section-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+    }
+    .intro-left {}
+    .intro-right {}
+
+    /* ===================================================
+       SERVICES / PROCESS SECTION
+       =================================================== */
+    #process {
+      background-color: var(--color-white);
+    }
+
+    .services-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: var(--space-2xl);
+    }
+
+    .service-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: var(--space-m) 0;
+      border-top: 1px solid rgba(30,30,27,0.1);
+      cursor: default;
+      transition: padding-left .25s ease;
+    }
+    .service-item:last-child {
+      border-bottom: 1px solid rgba(30,30,27,0.1);
+    }
+    .service-item:hover {
+      padding-left: var(--space-s);
+    }
+    .service-item:hover .service-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .service-number {
+      font-family: var(--font-family-base);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-light-grey);
+      letter-spacing: 0.05em;
+      width: 40px;
+      flex-shrink: 0;
+    }
+    .service-name {
+      font-family: var(--font-family-title);
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      flex: 1;
+      padding: 0 var(--space-m);
+    }
+    .service-desc {
+      font-family: var(--font-family-base);
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--color-light-grey);
+      max-width: 280px;
+      text-align: right;
+      line-height: 1.5;
+    }
+    .service-arrow {
+      font-size: 1rem;
+      color: var(--color-light-grey);
+      margin-left: var(--space-m);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    @media (max-width: 768px) {
+      .service-item {
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+      .service-desc {
+        text-align: left;
+        max-width: 100%;
+      }
+      .service-arrow { display: none; }
+    }
+
+    /* ===================================================
+       ABOUT / TEAM SECTION
+       =================================================== */
+    #team {
+      background-color: var(--color-light-pink);
+    }
+
+    .team-header {
+      max-width: 700px;
+      margin-bottom: var(--space-4xl);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+    }
+
+    .team-portrait {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .team-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(8%);
+    }
+
+    .team-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-l);
+      padding-top: var(--space-l);
+    }
+
+    .team-name {
+      font-family: var(--font-family-title);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .team-role {
+      font-family: var(--font-family-base);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-greyish-brown);
+    }
+
+    .team-bio {
+      font-family: var(--font-family-base);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--color-black);
+      max-width: 520px;
+    }
+
+    .team-socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-s);
+      margin-top: var(--space-s);
+    }
+    .team-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid rgba(30,30,27,0.2);
+      border-radius: 40px;
+      font-family: var(--font-family-base);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-black);
+      transition: background-color .2s ease, border-color .2s ease;
+    }
+    .team-social-link:hover {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      border-color: var(--color-black);
+    }
+
+    /* ===================================================
+       VISION / COMMITMENTS SECTION
+       =================================================== */
+    #vision {
+      background-color: var(--color-white);
+    }
+
+    .vision-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .vision-layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+    }
+
+    .vision-left {
+      position: sticky;
+      top: var(--space-2xl);
+    }
+
+    .vision-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: var(--space-l);
+    }
+
+    .vision-item {
+      padding: var(--space-m) 0;
+      border-top: 1px solid rgba(30,30,27,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .vision-item:last-child {
+      border-bottom: 1px solid rgba(30,30,27,0.1);
+    }
+
+    .vision-item-title {
+      font-family: var(--font-family-title);
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: var(--space-m);
+    }
+    .vision-item-title::before {
+      content: '→';
+      font-family: var(--font-family-base);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--color-light-grey);
+      flex-shrink: 0;
+    }
+
+    .vision-item-desc {
+      font-family: var(--font-family-base);
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--color-light-grey);
+      line-height: 1.6;
+      padding-left: 38px;
+    }
+
+    /* ===================================================
+       CLIENTS / SOCIAL PROOF SECTION
+       =================================================== */
+    #clients {
+      background-color: var(--color-tan);
+    }
+
+    .clients-header {
+      margin-bottom: var(--space-3xl);
+      max-width: 650px;
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .clients-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xl);
+      }
+    }
+
+    .client-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-s);
+      padding: var(--space-l);
+      background: rgba(250,248,244,0.6);
+      border-radius: 4px;
+    }
+
+    .client-quote {
+      font-family: var(--font-family-title);
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--color-black);
+    }
+
+    .client-name {
+      font-family: var(--font-family-base);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-greyish-brown);
+    }
+
+    .platform-icons {
+      display: flex;
+      align-items: center;
+      gap: var(--space-l);
+      margin-top: var(--space-2xl);
+      flex-wrap: wrap;
+    }
+    .platform-label {
+      font-family: var(--font-family-base);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-greyish-brown);
+    }
+    .platform-link {
+      font-family: var(--font-family-base);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--color-black);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color .2s ease;
+    }
+    .platform-link:hover { color: var(--color-dark-teal); }
+
+    /* ===================================================
+       CONTACT SECTION
+       =================================================== */
+    #contact {
+      background-color: var(--color-black);
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+    }
+
+    #contact .section-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-xl);
+    }
+
+    .contact-eyebrow {
+      font-family: var(--font-family-base);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-light-grey);
+    }
+
+    .contact-headline {
+      font-family: var(--font-family-title);
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-white);
+      max-width: 750px;
+    }
+    .contact-headline em {
+      font-style: italic;
+      color: var(--color-pink);
+    }
+
+    .contact-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-s);
+      padding: 16px 36px;
+      background: var(--color-white);
+      color: var(--color-black);
+      font-family: var(--font-family-base);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background-color .2s ease, color .2s ease;
+    }
+    .contact-cta:hover {
+      background: var(--color-pink);
+    }
+
+    .contact-social-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-l);
+      flex-wrap: wrap;
+      margin-top: var(--space-m);
+    }
+    .contact-social-link {
+      font-family: var(--font-family-base);
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--color-light-grey);
+      letter-spacing: 0.05em;
+      transition: color .2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .contact-social-link:hover { color: var(--color-white); }
+
+    /* ===================================================
+       FOOTER
+       =================================================== */
+    footer {
+      background-color: var(--color-white);
+      min-height: var(--footer-height);
+      border-top: 1px solid rgba(30,30,27,0.08);
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: var(--space-l) var(--space-2xl);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-m);
+    }
+
+    @media (max-width: 768px) {
+      .footer-inner {
+        padding: var(--space-l) var(--space-m);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-s);
+      }
+    }
+
+    .footer-name {
+      font-family: var(--font-family-title);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--space-l);
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      font-family: var(--font-family-base);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--color-light-grey);
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+    .footer-link:hover { color: var(--color-black); }
+
+    .footer-copy {
+      font-family: var(--font-family-base);
+      font-size: 0.75rem;
+      color: var(--color-light-grey);
+    }
+
+    /* ===================================================
+       SCROLL REVEAL ANIMATION
+       =================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ===================================================
+       ACCENT MARKS
+       =================================================== */
+    .accent-pink  { color: var(--color-pink); }
+    .accent-tan   { color: #8a6900; }
+    .accent-teal  { color: var(--color-dark-teal); }
+
+    /* ===================================================
+       MOBILE NAV (collapsed)
+       =================================================== */
+    .mobile-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 18px var(--space-m);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250,248,244,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(30,30,27,0.06);
+    }
+    @media (min-width: 768px) and (orientation: landscape) {
+      .mobile-nav { display: none; }
+    }
+    .mobile-nav__brand {
+      font-family: var(--font-family-title);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--color-black);
+    }
+    .mobile-nav__links {
+      display: flex;
+      gap: var(--space-m);
+    }
+    .mobile-nav__link {
+      font-family: var(--font-family-base);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-light-grey);
+      transition: color .2s ease;
+    }
+    .mobile-nav__link:hover { color: var(--color-black); }
+
+    /* offset hero for mobile nav */
+    @media (max-width: 767px) {
+      #hero { padding-top: 70px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- SKIP LINKS -->
+  <div class="skiplinks" aria-label="Skip navigation">
+    <a class="skiplinks__link" href="#main-content">Skip to content</a>
+    <a class="skiplinks__link" href="#process">Services</a>
+    <a class="skiplinks__link" href="#team">About Matt</a>
+    <a class="skiplinks__link" href="#vision">Philosophy</a>
+    <a class="skiplinks__link" href="#clients">Testimonials</a>
+    <a class="skiplinks__link" href="#contact">Contact</a>
+  </div>
+
+  <!-- MOBILE NAV -->
+  <nav class="mobile-nav" aria-label="Primary navigation">
+    <a href="#hero" class="mobile-nav__brand">Mystic Matt Young</a>
+    <div class="mobile-nav__links">
+      <a href="#process" class="mobile-nav__link">Services</a>
+      <a href="#team" class="mobile-nav__link">About</a>
+      <a href="#contact" class="mobile-nav__link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- PAGE WRAPPER -->
+  <div id="page-home">
+
+    <!-- LEFT RAIL (desktop sticky nav) -->
+    <aside id="home-left-rail" aria-label="Page navigation">
+      <nav class="left-rail__nav">
+        <span class="left-rail__logo">MMY</span>
+        <a href="#process"  class="left-rail__link">Services</a>
+        <a href="#team"     class="left-rail__link">About</a>
+        <a href="#vision"   class="left-rail__link">Philosophy</a>
+        <a href="#clients"  class="left-rail__link">Testimonials</a>
+        <a href="#contact"  class="left-rail__link">Contact</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main id="home-content">
+
+      <!-- =============================================
+           HERO
+           ============================================= -->
+      <section id="hero" aria-label="Hero">
+
+        <div class="hero-bg" role="img" aria-label="Matt Young outdoors, smiling warmly"></div>
+
+        <div class="hero-logo-fixed">
+          <span>Mystic Matt Young</span>
+        </div>
+
+        <div class="hero-content">
+          <h1 class="typo-hero-title reveal">
+            International Speaker,<br>
+            Healer, Oracle<br>
+            <em style="font-style:italic; color: var(--color-pink);">&amp; Author</em>
+          </h1>
+          <p class="typo-hero-subtitle reveal reveal-delay-1">
+            Spiritual technology, intuitive readings,<br>and miracle healings.
+          </p>
+          <div class="hero-scroll-hint reveal reveal-delay-2">Explore</div>
+        </div>
+
+      </section>
+
+      <!-- =============================================
+           INTRO
+           ============================================= -->
+      <section id="intro" id="main-content" aria-labelledby="intro-title">
+        <div class="section-inner">
+          <div class="intro-left">
+            <span class="typo-label section-label reveal">The Work</span>
+            <h2 class="typo-section-title reveal reveal-delay-1" id="intro-title">
+              Awakening the<br>soul's deepest truth
+            </h2>
+          </div>
+          <div class="intro-right">
+            <p class="typo-section-desc-xl reveal reveal-delay-2">
+              Matt Young — known as Mystic Matt — blends ancient spiritual wisdom with modern insight to guide individuals toward profound transformation, clarity, and healing.
+            </p>
+            <div class="divider reveal reveal-delay-3"></div>
+            <p class="typo-section-desc reveal reveal-delay-3" style="color: var(--color-light-grey); margin-top: var(--space-m);">
+              As an internationally recognized speaker and intuitive healer, Matt has helped thousands access their highest potential through clairvoyance, life activations, and spiritual technology rooted in sacred traditions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================================
+           SERVICES / PROCESS
+           ============================================= -->
+      <section id="process" aria-labelledby="process-title">
+        <div class="section-inner">
+
+          <span class="typo-label section-label reveal">Offerings</span>
+          <h2 class="typo-section-title reveal reveal-delay-1" id="process-title">
+            What we create<br>together
+          </h2>
+
+          <ul class="services-grid">
+
+            <li class="service-item reveal">
+              <span class="service-number">01</span>
+              <span class="service-name">Spiritual Healing</span>
+              <span class="service-desc">Deep energetic restoration and release of subconscious blocks</span>
+              <span class="service-arrow">→</span>
+            </li>
+
+            <li class="service-item reveal reveal-delay-1">
+              <span class="service-number">02</span>
+              <span class="service-name">Intuitive Readings</span>
+              <span class="service-desc">Clairvoyant insight into your path, relationships, and purpose</span>
+              <span class="service-arrow">→</span>
+            </li>
+
+            <li class="service-item reveal reveal-delay-2">
+              <span class="service-number">03</span>
+              <span class="service-name">Clairvoyance</span>
+              <span class="service-desc">Seeing beyond the veil — clear sight into your soul's journey</span>
+              <span class="service-arrow">→</span>
+            </li>
+
+            <li class="service-item reveal reveal-delay-3">
+              <span class="service-number">04</span>
+              <span class="service-name">Life Activations</span>
+              <span class="service-desc">Ancient activation methods to unlock your highest blueprint</span>
+              <span class="service-arrow">→</span>
+            </li>
+
+            <li class="service-item reveal reveal-delay-4">
+              <span class="service-number">05</span>
+              <span class="service-name">Spiritual Technology</span>
+              <span class="service-desc">Sacred tools and practices that accelerate conscious evolution</span>
+              <span class="service-arrow">→</span>
+            </li>
+
+            <li class="service-item reveal">
+              <span class="service-number">06</span>
+              <span class="service-name">Speaking & Events</span>
+              <span class="service-desc">International keynotes, workshops, and transformational events</span>
+              <span class="service-arrow">→</span>
+            </li>
+
+            <li class="service-item reveal reveal-delay-1">
+              <span class="service-number">07</span>
+              <span class="service-name">Miracle Healings</span>
+              <span class="service-desc">Direct transmission healing sessions for the body, mind, and spirit</span>
+              <span class="service-arrow">→</span>
+            </li>
+
+          </ul>
+        </div>
+      </section>
+
+      <!-- =============================================
+           ABOUT / TEAM
+           ============================================= -->
+      <section id="team" aria-labelledby="team-title">
+        <div class="section-inner">
+
+          <div class="team-header">
+            <span class="typo-label section-label reveal">About</span>
+            <h2 class="typo-section-title reveal reveal-delay-1" id="team-title">
+              The healer behind<br>the mission
+            </h2>
+          </div>
+
+          <div class="team-grid">
+
+            <div class="team-portrait reveal">
+              <img
+                src="https://img1.wsimg.com/isteam/ip/73a0fb88-2002-417e-8512-b078afc28087/IMG_5921.jpg"
+                alt="Matt Young — Mystic Matt Young, spiritual healer and international speaker, seated outdoors in a relaxed, warm setting"
+                width="720"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="team-info">
+              <div class="reveal">
+                <p class="team-role">Spiritual Healer · Oracle · Author · Speaker</p>
+              </div>
+              <h3 class="team-name reveal reveal-delay-1">Matt Young</h3>
+              <p class="team-bio reveal reveal-delay-2">
+                Matt Young — Mystic Matt — is an internationally recognized spiritual healer, clairvoyant, oracle, and author. With a warm, grounded presence, he bridges the gap between the seen and unseen worlds, helping seekers from every background step into their power, heal their past, and live in alignment with their soul's highest calling.
+              </p>
+              <p class="team-bio reveal reveal-delay-3" style="margin-top: -10px;">
+                His work draws on ancient lineages, spiritual technology, and the deep intelligence of the heart. Matt has spoken on international stages, facilitated profound healings, and authored works that illuminate the path of spiritual awakening.
+              </p>
+              <div class="team-socials reveal reveal-delay-4">
+                <a
+                  href="https://www.instagram.com/mysticmattyoung/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="team-social-link"
+                  aria-label="Mystic Matt Young on Instagram"
+                >
+                  Instagram
+                </a>
+                <a
+                  href="https://www.youtube.com/@MattYoungSpeaks"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="team-social-link"
+                  aria-label="Matt Young on YouTube"
+                >
+                  YouTube
+                </a>
+                <a
+                  href="https://www.facebook.com/mysticmattyt/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="team-social-link"
+                  aria-label="Mystic Matt on Facebook"
+                >
+                  Facebook
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================================
+           VISION / PHILOSOPHY
+           ============================================= -->
+      <section id="vision" aria-labelledby="vision-title">
+        <div class="section-inner">
+          <div class="vision-layout">
+
+            <div class="vision-left">
+              <span class="typo-label section-label reveal">Philosophy</span>
+              <h2 class="typo-section-title reveal reveal-delay-1" id="vision-title">
+                A vision for<br>conscious living
+              </h2>
+              <p class="typo-section-desc reveal reveal-delay-2" style="margin-top: var(--space-m); color: var(--color-light-grey); max-width: 380px;">
+                Matt's work is grounded in four core commitments that guide every session, every teaching, and every encounter.
+              </p>
+            </div>
+
+            <div>
+              <ul class="vision-list">
+
+                <li class="vision-item reveal">
+                  <div class="vision-item-title">Authentic Healing</div>
+                  <div class="vision-item-desc">
+                    Every session is rooted in genuine spiritual connection — no performance, no pretense. Only real, lasting transformation.
+                  </div>
+                </li>
+
+                <li class="vision-item reveal reveal-delay-1">
+                  <div class="vision-item-title">Sacred Lineage</div>
+                  <div class="vision-item-desc">
+                    Matt's methods are drawn from ancient wisdom traditions — rigorously respected, ethically transmitted, and continually refined.
+                  </div>
+                </li>
+
+                <li class="vision-item reveal reveal-delay-2">
+                  <div class="vision-item-title">Soul-First Approach</div>
+                  <div class="vision-item-desc">
+                    True healing begins with the soul. Matt guides clients beyond surface symptoms to the root spiritual causes of struggle and limitation.
+                  </div>
+                </li>
+
+                <li class="vision-item reveal reveal-delay-3">
+                  <div class="vision-item-title">Global Accessibility</div>
+                  <div class="vision-item-desc">
+                    Spiritual growth should not be gatekept. Matt's work is offered internationally, in-person and online, to reach seekers wherever they are.
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================================
+           CLIENTS / TESTIMONIALS
+           ============================================= -->
+      <section id="clients" aria-labelledby="clients-title">
+        <div class="section-inner">
+
+          <div class="clients-header">
+            <span class="typo-label section-label reveal">Testimonials</span>
+            <h2 class="typo-section-title reveal reveal-delay-1" id="clients-title">
+              Lives transformed
+            </h2>
+            <p class="typo-section-desc-lg reveal reveal-delay-2" style="margin-top: var(--space-m); color: var(--color-greyish-brown);">
+              Real words from people who've experienced the work firsthand.
+            </p>
+          </div>
+
+          <div class="clients-grid">
+
+            <div class="client-card reveal">
+              <p class="client-quote">
+                "Matt's healing session was one of the most profound experiences of my life. I felt genuinely seen and healed at a soul level."
+              </p>
+              <span class="client-name">— Sarah M., Melbourne</span>
+            </div>
+
+            <div class="client-card reveal reveal-delay-1">
+              <p class="client-quote">
+                "The intuitive reading Matt gave me was frighteningly accurate. He identified blocks I'd carried for decades and helped me release them."
+              </p>
+              <span class="client-name">— James R., New York</span>
+            </div>
+
+            <div class="client-card reveal reveal-delay-2">
+              <p class="client-quote">
+                "After my life activation, everything shifted. My relationships, my career, my sense of purpose — all transformed within weeks."
+              </p>
+              <span class="client-name">— Elena K., London</span>
+            </div>
+
+          </div>
+
+          <div class="platform-icons reveal">
+            <span class="platform-label">Follow the journey →</span>
+            <a
+              href="https://www.instagram.com/mysticmattyoung/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="platform-link"
+            >@mysticmattyoung</a>
+            <a
+              href="https://www.youtube.com/@MattYoungSpeaks"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="platform-link"
+            >@MattYoungSpeaks</a>
+            <a
+              href="https://www.facebook.com/mysticmattyt/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="platform-link"
+            >Mystic Matt</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =============================================
+           CONTACT
+           ============================================= -->
+      <section id="contact" aria-labelledby="contact-title">
+        <div class="section-inner">
+
+          <span class="contact-eyebrow reveal">Ready to begin?</span>
+
+          <h2 class="contact-headline reveal reveal-delay-1" id="contact-title">
+            Convinced? Let's<br>
+            <em>heal together.</em>
+          </h2>
+
+          <a
+            href="https://www.instagram.com/mysticmattyoung/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-cta reveal reveal-delay-2"
+          >
+            Book a Session →
+          </a>
+
+          <div class="contact-social-row reveal reveal-delay-3">
+            <a
+              href="https://www.instagram.com/mysticmattyoung/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-social-link"
+            >
+              ↗ Instagram
+            </a>
+            <a
+              href="https://www.youtube.com/@MattYoungSpeaks"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-social-link"
+            >
+              ↗ YouTube
+            </a>
+            <a
+              href="https://www.facebook.com/mysticmattyt/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-social-link"
+            >
+              ↗ Facebook
+            </a>
+            <a
+              href="https://mysticmattyoung.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-social-link"
+            >
+              ↗ mysticmattyoung.com
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+    </main><!-- /home-content -->
+
+  </div><!-- /page-home -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-name">Mystic Matt Young</span>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#process"  class="footer-link">Services</a>
+        <a href="#team"     class="footer-link">About</a>
+        <a href="#vision"   class="footer-link">Philosophy</a>
+        <a href="#clients"  class="footer-link">Testimonials</a>
+        <a href="#contact"  class="footer-link">Contact</a>
+        <a href="https://mysticmattyoung.com" target="_blank" rel="noopener noreferrer" class="footer-link">Website</a>
+      </nav>
+      <span class="footer-copy">©2026. Mystic Matt Young</span>
+    </div>
+  </footer>
+
+  <script>
+    // =============================================
+    // SCROLL REVEAL
+    // =============================================
+    (function() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(function(el) { observer.observe(el); });
+
+      // Trigger hero reveals immediately
+      setTimeout(function() {
+        document.querySelectorAll('#hero .reveal').forEach(function(el) {
+          el.classList.add('visible');
+        });
+      }, 300);
+    })();
+
+    // =============================================
+    // SMOOTH SCROLL for anchor links
+    // =============================================
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // =============================================
+    // MOBILE NAV: hide when scrolled to hero top
+    // =============================================
+    (function() {
+      var nav = document.querySelector('.mobile-nav');
+      var lastScroll = 0;
+      window.addEventListener('scroll', function() {
+        var current = window.scrollY;
+        if (current < 80) {
+          nav.style.transform = 'translateY(0)';
+        } else if (current > lastScroll + 5) {
+          nav.style.transform = 'translateY(-100%)';
+          nav.style.transition = 'transform .3s ease';
+        } else if (current < lastScroll - 5) {
+          nav.style.transform = 'translateY(0)';
+        }
+        lastScroll = current;
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
