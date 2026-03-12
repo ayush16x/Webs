@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en-au">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Controller Academy | Empowering Finance Professionals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ======== TOP BANNER ======== -->
+<div class="top-banner" id="topBanner">
+  <div class="container top-banner-inner">
+    <span>🎓 New: CFO Bundle — Master Finance, FP&amp;A &amp; Leadership. Save over 60% →</span>
+    <a href="#bundles" class="top-banner-link">Explore Bundle</a>
+    <button class="top-banner-close" id="closeBanner" aria-label="Close">✕</button>
+  </div>
+</div>
+
+<!-- ======== NAVIGATION ======== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner container">
+    <a href="#home" class="nav-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#lg1)"/><path d="M10 28V14l10-6 10 6v14l-10 5-10-5z" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M20 14v14M14 17l6 3 6-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><defs><linearGradient id="lg1" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#1a3a8f"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs></svg>
+      </div>
+      <div class="logo-text-block">
+        <span class="logo-name">Controller Academy</span>
+        <span class="logo-sub">Finance Education</span>
+      </div>
+    </a>
+
+    <ul class="nav-menu">
+      <li class="nav-item has-dropdown">
+        <a href="#capabilities" class="nav-link">Capabilities <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="#courses" class="nd-item"><div class="nd-icon" style="background:#1a3a8f15"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div><div class="nd-title">Accounting Fundamentals</div><div class="nd-desc">Entry-level to advanced</div></div></a>
+          <a href="#courses" class="nd-item"><div class="nd-icon" style="background:#6d28d915"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="nd-title">FP&amp;A &amp; Analysis</div><div class="nd-desc">Forecasting &amp; strategy</div></div></a>
+          <a href="#courses" class="nd-item"><div class="nd-icon" style="background:#0ea57215"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea572" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div><div><div class="nd-title">Corporate Tax</div><div class="nd-desc">Compliance &amp; planning</div></div></a>
+          <a href="#courses" class="nd-item"><div class="nd-icon" style="background:#f59e0b15"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div><div><div class="nd-title">KPIs &amp; Metrics</div><div class="nd-desc">Performance dashboards</div></div></a>
+          <a href="#courses" class="nd-item"><div class="nd-icon" style="background:#06b6d415"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></div><div><div class="nd-title">Advanced Excel</div><div class="nd-desc">Models &amp; dashboards</div></div></a>
+          <a href="#courses" class="nd-item"><div class="nd-icon" style="background:#ef444415"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="nd-title">CFO Leadership</div><div class="nd-desc">Executive finance skills</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="#training" class="nav-link">Training</a></li>
+      <li class="nav-item has-dropdown">
+        <a href="#bundles" class="nav-link">Bundles <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="#bundles" class="nd-item"><div class="nd-icon" style="background:#1a3a8f15"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div><div class="nd-title">Corporate Controller Bundle</div><div class="nd-desc">From accountant to controller</div></div></a>
+          <a href="#bundles" class="nd-item"><div class="nd-icon" style="background:#6d28d915"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="nd-title">CFO Bundle</div><div class="nd-desc">Finance leadership path</div></div></a>
+          <a href="#bundles" class="nd-item"><div class="nd-icon" style="background:#0ea57215"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea572" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><div><div class="nd-title">All-In-One Bundle</div><div class="nd-desc">Every course. Forever.</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+      <li class="nav-item"><a href="#news" class="nav-link">News</a></li>
+      <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="#contact" class="btn btn-outline-nav">Log a Request</a>
+      <a href="#courses" class="btn btn-primary-nav">Get Started</a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#capabilities">Capabilities</a>
+    <a href="#training">Training</a>
+    <a href="#bundles">Bundles</a>
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <div class="mobile-menu-btns">
+      <a href="#contact" class="btn btn-outline-nav">Log a Request</a>
+      <a href="#courses" class="btn btn-primary-nav">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ======== HERO ======== -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-shape hero-shape-1"></div>
+    <div class="hero-shape hero-shape-2"></div>
+    <div class="hero-shape hero-shape-3"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-particles" id="particles"></div>
+  </div>
+  <div class="container hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow reveal-up">
+        <span class="eyebrow-dot"></span>
+        NASBA Registered CPE Sponsor · Trusted by 10,000+ Finance Professionals
+      </div>
+      <h1 class="hero-title reveal-up delay-1">
+        Modern challenges demand<br><span class="h-grad">multidimensional</span><br>financial thinking.
+      </h1>
+      <p class="hero-desc reveal-up delay-2">
+        We provide professional accounting &amp; finance education that helps government, academia, and industry develop finance leaders who deliver excellence — and real impact.
+      </p>
+      <div class="hero-btns reveal-up delay-3">
+        <a href="#courses" class="btn btn-hero-primary">
+          Explore Capabilities
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-hero-outline">Log a Training Request</a>
+      </div>
+      <div class="hero-filters reveal-up delay-4">
+        <span class="filter-label">Find training for:</span>
+        <button class="filter-pill active">Industry</button>
+        <button class="filter-pill">Academia</button>
+        <button class="filter-pill">Government</button>
+      </div>
+    </div>
+    <div class="hero-right reveal-right delay-2">
+      <div class="hero-card-main">
+        <div class="hc-header">
+          <div class="hc-avatar">BH</div>
+          <div>
+            <div class="hc-name">Bill Hanna, CPA</div>
+            <div class="hc-role">Corporate Controller · Lead Instructor</div>
+          </div>
+          <div class="hc-badge">● Live</div>
+        </div>
+        <div class="hc-stats">
+          <div class="hcs"><span class="hcs-num">10k<sup>+</sup></span><span class="hcs-label">Students</span></div>
+          <div class="hcs-div"></div>
+          <div class="hcs"><span class="hcs-num">6</span><span class="hcs-label">Courses</span></div>
+          <div class="hcs-div"></div>
+          <div class="hcs"><span class="hcs-num">20<sup>yrs</sup></span><span class="hcs-label">Experience</span></div>
+        </div>
+        <div class="hc-tags">
+          <span>Accounting</span><span>FP&A</span><span>Tax</span><span>Excel</span><span>KPIs</span><span>Leadership</span>
+        </div>
+        <div class="hc-progress">
+          <div class="hcp-label">
+            <span>Course Completion Rate</span>
+            <span class="hcp-val">94%</span>
+          </div>
+          <div class="hcp-bar"><div class="hcp-fill" style="width:94%"></div></div>
+        </div>
+      </div>
+      <div class="hero-card-float hcf-1">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div><div class="hcf-title">NASBA Approved</div><div class="hcf-sub">CPE Credits Included</div></div>
+      </div>
+      <div class="hero-card-float hcf-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <div><div class="hcf-title">14-Day Guarantee</div><div class="hcf-sub">100% money back</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,60 C360,0 1080,60 1440,20 L1440,60 Z" fill="#f8faff"/></svg>
+  </div>
+</section>
+
+<!-- ======== MEMBER LOGOS ======== -->
+<section class="members-bar">
+  <div class="container">
+    <p class="members-label">Trusted by professionals from</p>
+    <div class="members-track">
+      <div class="members-inner" id="membersInner">
+        <div class="member-logo">The University of Queensland</div>
+        <div class="member-logo">Queensland University of Technology</div>
+        <div class="member-logo">Griffith University</div>
+        <div class="member-logo">James Cook University</div>
+        <div class="member-logo">CQUniversity</div>
+        <div class="member-logo">University of Southern Queensland</div>
+        <div class="member-logo">University of Sunshine Coast</div>
+        <div class="member-logo">Bond University</div>
+        <!-- Duplicate for seamless loop -->
+        <div class="member-logo">The University of Queensland</div>
+        <div class="member-logo">Queensland University of Technology</div>
+        <div class="member-logo">Griffith University</div>
+        <div class="member-logo">James Cook University</div>
+        <div class="member-logo">CQUniversity</div>
+        <div class="member-logo">University of Southern Queensland</div>
+        <div class="member-logo">University of Sunshine Coast</div>
+        <div class="member-logo">Bond University</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CAPABILITIES ======== -->
+<section class="section caps-section" id="capabilities">
+  <div class="container">
+    <div class="section-hd reveal-up">
+      <div class="stag">Our Capabilities</div>
+      <h2 class="stitle">Applied expertise across<br>the full finance spectrum</h2>
+      <p class="ssub">QCIF-style multidisciplinary training built from decades of real controller and finance leadership experience.</p>
+    </div>
+    <div class="caps-grid" id="courses">
+      <div class="cap-card reveal-up delay-1">
+        <div class="cap-icon" style="--cc:#1a3a8f">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="cap-tag">Accounting</div>
+        <h3>Accounting Fundamentals</h3>
+        <p>Master debit/credit rules, transaction recording, AP, AR, payroll and the full month-end close process.</p>
+        <div class="cap-meta">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4.5 hrs</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CPE Credits</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>All Levels</span>
+        </div>
+        <div class="cap-price">$499 <span class="cap-or">or 3×$200</span></div>
+        <a href="https://controller-academy.com/courses/entry-level-accountant-academy-cpe" target="_blank" class="cap-link">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="cap-card reveal-up delay-2">
+        <div class="cap-icon" style="--cc:#6d28d9">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="cap-tag" style="--ct:#6d28d9">Controllership</div>
+        <h3>Controller Program</h3>
+        <p>Prepare for corporate and assistant controller roles with complete job-scope walkthroughs and real-world templates.</p>
+        <div class="cap-meta">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6–8 hrs</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>10 CPE Credits</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Intermediate</span>
+        </div>
+        <div class="cap-price">$499 <span class="cap-or">or 3×$200</span></div>
+        <a href="https://controller-academy.com/unaccessible-old-pages-3g7ty53e4/controller-academy-program" target="_blank" class="cap-link" style="color:#6d28d9">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="cap-card reveal-up delay-3">
+        <div class="cap-icon" style="--cc:#0ea572">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+        </div>
+        <div class="cap-tag" style="--ct:#0ea572">Tax</div>
+        <h3>Corporate Tax Academy</h3>
+        <p>Online corporate tax certification covering tax planning, compliance, and strategy for controllers and finance leaders.</p>
+        <div class="cap-meta">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16"/></svg>Certification</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CPE Credits</span>
+          <span>LinkedIn Badge</span>
+        </div>
+        <div class="cap-price">$299</div>
+        <a href="https://controller-academy.com/courses/tax-academy" target="_blank" class="cap-link" style="color:#0ea572">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="cap-card reveal-up delay-1">
+        <div class="cap-icon" style="--cc:#f59e0b">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="cap-tag" style="--ct:#f59e0b">FP&A</div>
+        <h3>FP&amp;A Academy</h3>
+        <p>Build financial planning and analysis skills — budgeting, forecasting, variance analysis, and strategic reporting.</p>
+        <div class="cap-meta">
+          <span>On-Demand</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>NASBA CPE</span>
+          <span>Excel Templates</span>
+        </div>
+        <div class="cap-price">$299</div>
+        <a href="https://controller-academy.com/courses/fpa-academy" target="_blank" class="cap-link" style="color:#f59e0b">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="cap-card reveal-up delay-2">
+        <div class="cap-icon" style="--cc:#ef4444">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="cap-tag" style="--ct:#ef4444">KPIs</div>
+        <h3>KPIs &amp; Financial Metrics</h3>
+        <p>Discover the KPIs and financial metrics that reveal more about a business than most people ever see.</p>
+        <div class="cap-meta">
+          <span>Dashboard Templates</span>
+          <span>Ratio Analysis</span>
+          <span>Real Examples</span>
+        </div>
+        <div class="cap-price">$179</div>
+        <a href="https://controller-academy.com/courses/learn-kpis-and-financial-metrics" target="_blank" class="cap-link" style="color:#ef4444">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="cap-card reveal-up delay-3">
+        <div class="cap-icon" style="--cc:#06b6d4">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+        </div>
+        <div class="cap-tag" style="--ct:#06b6d4">Excel</div>
+        <h3>Advanced Excel Academy</h3>
+        <p>Master pivot tables, Power Query, financial models, and dynamic dashboards that finance professionals use daily.</p>
+        <div class="cap-meta">
+          <span>Power Query</span>
+          <span>Financial Models</span>
+          <span>Workbooks</span>
+        </div>
+        <div class="cap-price">$149</div>
+        <a href="https://controller-academy.com/courses/excel-academy" target="_blank" class="cap-link" style="color:#06b6d4">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="caps-cta reveal-up">
+      <a href="https://controller-academy.com/" target="_blank" class="btn btn-outline-dark">View All Courses on Controller Academy</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== STATS STRIP ======== -->
+<section class="stats-strip">
+  <div class="container stats-inner">
+    <div class="sstat reveal-fade">
+      <div class="sstat-num" data-target="10000">0</div>
+      <div class="sstat-label">Students Enrolled</div>
+    </div>
+    <div class="sstat-line"></div>
+    <div class="sstat reveal-fade delay-1">
+      <div class="sstat-num" data-target="6">0</div>
+      <div class="sstat-label">Expert Courses</div>
+    </div>
+    <div class="sstat-line"></div>
+    <div class="sstat reveal-fade delay-2">
+      <div class="sstat-num" data-target="40">0</div>
+      <div class="sstat-label">Curriculum Topics</div>
+    </div>
+    <div class="sstat-line"></div>
+    <div class="sstat reveal-fade delay-3">
+      <div class="sstat-num" data-target="20">0</div>
+      <div class="sstat-label">Years of Experience</div>
+    </div>
+    <div class="sstat-line"></div>
+    <div class="sstat reveal-fade delay-4">
+      <div class="sstat-num" data-target="94">0</div>
+      <div class="sstat-label">% Completion Rate</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== VIDEO FEATURE ======== -->
+<section class="section video-section">
+  <div class="container">
+    <div class="video-inner">
+      <div class="video-left reveal-left">
+        <div class="stag">Featured Video</div>
+        <h2 class="stitle" style="font-size:clamp(1.7rem,3vw,2.4rem)">See what it means to think like a <span class="h-grad-dark">Corporate Controller</span></h2>
+        <p class="ssub" style="text-align:left;max-width:100%">Bill Hanna walks you through the real responsibilities of a controller — from closing the books to strategic financial reporting. Nearly 300,000 YouTube subscribers trust his weekly content.</p>
+        <ul class="video-bullets">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Real-world walkthroughs, not textbook theory</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>15+ year career in auditing &amp; corporate accounting</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Weekly videos on accounting, FP&amp;A, and leadership</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Nearly 300,000 YouTube subscribers</li>
+        </ul>
+        <a href="https://www.youtube.com/@TheFinancialController/featured" target="_blank" class="btn btn-primary-dark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Visit YouTube Channel
+        </a>
+      </div>
+      <div class="video-right reveal-right">
+        <div class="video-frame-wrap">
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed?list=UU_nhE8RYGlOzdwckSY0pLjA&listType=playlist&index=1"
+              title="The Financial Controller - Bill Hanna"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="vf-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff0000" stroke="none"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#fff" points="9.545,15.568 15.818,12 9.545,8.432"/></svg>
+            YouTube · @TheFinancialController
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== TRAINING CALENDAR ======== -->
+<section class="section training-section" id="training">
+  <div class="container">
+    <div class="section-hd reveal-up">
+      <div class="stag">Training Calendar</div>
+      <h2 class="stitle">Upcoming Workshops<br>&amp; Live Sessions</h2>
+      <p class="ssub">Join live, instructor-led training sessions covering accounting, FP&A, Excel and more. Nearly 40 curriculum topics available on demand.</p>
+    </div>
+    <div class="training-tabs reveal-up">
+      <button class="ttab active" data-tab="all">All Events</button>
+      <button class="ttab" data-tab="accounting">Accounting</button>
+      <button class="ttab" data-tab="fpa">FP&A</button>
+      <button class="ttab" data-tab="excel">Excel</button>
+      <button class="ttab" data-tab="leadership">Leadership</button>
+    </div>
+    <div class="training-grid" id="trainingGrid">
+      <div class="train-card reveal-up delay-1" data-cat="accounting">
+        <div class="tc-date"><span class="tc-day">12</span><span class="tc-mon">Apr</span></div>
+        <div class="tc-body">
+          <div class="tc-tag" style="background:#1a3a8f15;color:#1a3a8f">Accounting</div>
+          <h4>Month-End Close Masterclass</h4>
+          <p>A deep-dive into the complete month-end close process — from journal entries to finalizing the trial balance.</p>
+          <div class="tc-meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>3 hours</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Online · Live</span>
+            <span class="tc-seats">12 seats left</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-sm-primary">Register</a>
+      </div>
+      <div class="train-card reveal-up delay-2" data-cat="fpa">
+        <div class="tc-date"><span class="tc-day">19</span><span class="tc-mon">Apr</span></div>
+        <div class="tc-body">
+          <div class="tc-tag" style="background:#f59e0b15;color:#f59e0b">FP&A</div>
+          <h4>Budgeting &amp; Forecasting Workshop</h4>
+          <p>Build robust budgets and rolling forecasts using industry-standard FP&amp;A methodologies and Excel models.</p>
+          <div class="tc-meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4 hours</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Online · Live</span>
+            <span class="tc-seats">8 seats left</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-sm-primary">Register</a>
+      </div>
+      <div class="train-card reveal-up delay-3" data-cat="excel">
+        <div class="tc-date"><span class="tc-day">26</span><span class="tc-mon">Apr</span></div>
+        <div class="tc-body">
+          <div class="tc-tag" style="background:#06b6d415;color:#06b6d4">Excel</div>
+          <h4>Financial Dashboards in Excel</h4>
+          <p>Create dynamic, professional KPI dashboards from scratch using advanced Excel — pivot tables, charts, and automation.</p>
+          <div class="tc-meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 hours</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Online · Live</span>
+            <span class="tc-seats">20 seats left</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-sm-primary">Register</a>
+      </div>
+      <div class="train-card reveal-up delay-1" data-cat="accounting">
+        <div class="tc-date"><span class="tc-day">03</span><span class="tc-mon">May</span></div>
+        <div class="tc-body">
+          <div class="tc-tag" style="background:#0ea57215;color:#0ea572">Tax</div>
+          <h4>Corporate Tax Compliance Bootcamp</h4>
+          <p>Navigate corporate tax compliance requirements with practical guidance on filings, estimates, and planning strategies.</p>
+          <div class="tc-meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 hours</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Online · Live</span>
+            <span class="tc-seats">15 seats left</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-sm-primary">Register</a>
+      </div>
+      <div class="train-card reveal-up delay-2" data-cat="leadership">
+        <div class="tc-date"><span class="tc-day">10</span><span class="tc-mon">May</span></div>
+        <div class="tc-body">
+          <div class="tc-tag" style="background:#6d28d915;color:#6d28d9">Leadership</div>
+          <h4>Controller to CFO: Career Strategy</h4>
+          <p>Map your path from controller to CFO — leadership frameworks, executive communication, and building your finance team.</p>
+          <div class="tc-meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>3 hours</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Online · Live</span>
+            <span class="tc-seats">6 seats left</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-sm-primary">Register</a>
+      </div>
+      <div class="train-card reveal-up delay-3" data-cat="fpa">
+        <div class="tc-date"><span class="tc-day">17</span><span class="tc-mon">May</span></div>
+        <div class="tc-body">
+          <div class="tc-tag" style="background:#ef444415;color:#ef4444">KPIs</div>
+          <h4>KPI Framework Design Workshop</h4>
+          <p>Design a KPI framework from the ground up — select the right metrics, build dashboards, and present to leadership.</p>
+          <div class="tc-meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4 hours</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Online · Live</span>
+            <span class="tc-seats">18 seats left</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-sm-primary">Register</a>
+      </div>
+    </div>
+    <div class="training-footer reveal-up">
+      <p>Can't find what you're looking for? We offer custom training for teams and organisations.</p>
+      <a href="#contact" class="btn btn-outline-dark">Submit a Training Request</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== BUNDLES ======== -->
+<section class="section bundles-section" id="bundles">
+  <div class="container">
+    <div class="section-hd reveal-up">
+      <div class="stag">Course Bundles</div>
+      <h2 class="stitle">Enterprise-Level Learning<br>at Individual Pricing</h2>
+      <p class="ssub">Save up to 70% with our comprehensive bundles — designed for career transitions, upskilling, and finance team training.</p>
+    </div>
+    <div class="bundles-grid">
+      <div class="bundle-card reveal-up delay-1">
+        <div class="bc-header">
+          <div class="bc-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div>
+            <h3>Corporate Controller Bundle</h3>
+            <p>From accountant to controller — the complete career path.</p>
+          </div>
+        </div>
+        <ul class="bc-includes">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Entry-Level Accountant Academy</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Controller Academy Program</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Corporate Tax Academy</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Advanced Excel Academy</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>All Excel &amp; Financial Templates</li>
+        </ul>
+        <div class="bc-price-row">
+          <div><div class="bc-was">Was <s>$1,495+</s></div><div class="bc-now">$499</div><div class="bc-per">one-time payment</div></div>
+          <a href="https://controller-academy.com/bundles/total-controller-access" target="_blank" class="btn btn-primary-dark">Enroll</a>
+        </div>
+      </div>
+
+      <div class="bundle-card bundle-featured reveal-up delay-2">
+        <div class="bc-badge">Most Popular</div>
+        <div class="bc-header">
+          <div class="bc-icon bc-icon-w">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div>
+            <h3>CFO Bundle</h3>
+            <p>Master Finance, FP&amp;A &amp; Leadership — the path to the C-suite.</p>
+          </div>
+        </div>
+        <ul class="bc-includes">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Everything in Controller Bundle</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>FP&amp;A Academy</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>KPIs &amp; Financial Metrics</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>CFO Leadership Training</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>All Templates + Priority Support</li>
+        </ul>
+        <div class="bc-price-row">
+          <div><div class="bc-was" style="color:rgba(255,255,255,0.6)">Was <s>$2,495+</s></div><div class="bc-now">$1,300</div><div class="bc-per" style="color:rgba(255,255,255,0.7)">or 3 monthly payments</div></div>
+          <a href="https://controller-academy.com/bundles/cfo-bundle" target="_blank" class="btn btn-white-outline">Enroll</a>
+        </div>
+      </div>
+
+      <div class="bundle-card reveal-up delay-3">
+        <div class="bc-header">
+          <div class="bc-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <h3>All-In-One Finance Bundle</h3>
+            <p>Every course, every template, every future update. Forever.</p>
+          </div>
+        </div>
+        <ul class="bc-includes">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Every course on the platform</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>All future courses included free</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Annual updates at no extra cost</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Lifetime access, no expiration</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>All Excel &amp; financial templates</li>
+        </ul>
+        <div class="bc-price-row">
+          <div><div class="bc-was">Was <s>$3,495+</s></div><div class="bc-now">$1,300</div><div class="bc-per">best value on the platform</div></div>
+          <a href="https://controller-academy.com/bundles/entire-website-bundle" target="_blank" class="btn btn-primary-dark">Enroll</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ABOUT ======== -->
+<section class="section about-section" id="about">
+  <div class="container about-inner">
+    <div class="about-left reveal-left">
+      <div class="stag">Who We Are</div>
+      <h2 class="stitle">Real experience.<br>Real world. <span class="h-grad-dark">Real results.</span></h2>
+      <p>Controller Academy was built by Bill Hanna, CPA — a seasoned Corporate Controller with nearly two decades of experience across industries. Unlike textbook-based programs, every course is built from the lessons learned in actual controller roles.</p>
+      <p>Our mission mirrors the QCIF philosophy: that modern challenges demand multidimensional thinking. We provide professional accounting &amp; finance capabilities that help industry, academia, and government develop finance leaders who deliver excellence — and real impact.</p>
+      <div class="about-pillars">
+        <div class="about-pillar">
+          <div class="ap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><strong>NASBA Registered</strong><br><span>National CPE Sponsor Registry</span></div>
+        </div>
+        <div class="about-pillar">
+          <div class="ap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div><strong>Nearly 40 Topics</strong><br><span>Across all finance disciplines</span></div>
+        </div>
+        <div class="about-pillar">
+          <div class="ap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0ea572" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><strong>Lifetime Access</strong><br><span>No expiry, updated annually</span></div>
+        </div>
+        <div class="about-pillar">
+          <div class="ap-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div><strong>10,000+ Students</strong><br><span>Globally, across all industries</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-right reveal-right">
+      <div class="about-visual-grid">
+        <div class="avg-main">
+          <div class="avg-photo-placeholder">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="avg-name-card">
+              <div class="avg-nc-title">Bill Hanna, CPA</div>
+              <div class="avg-nc-sub">Founder · Lead Instructor</div>
+            </div>
+          </div>
+        </div>
+        <div class="avg-side">
+          <div class="avs-card avs-blue">
+            <div class="avs-num">~20</div>
+            <div class="avs-label">Years Experience</div>
+          </div>
+          <div class="avs-card avs-purple">
+            <div class="avs-num">300k</div>
+            <div class="avs-label">YouTube Subscribers</div>
+          </div>
+          <div class="avs-card avs-green">
+            <div class="avs-num">10k+</div>
+            <div class="avs-label">Students Trained</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== TESTIMONIALS ======== -->
+<section class="section testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-hd reveal-up">
+      <div class="stag">Student Reviews</div>
+      <h2 class="stitle">What our students say</h2>
+    </div>
+    <div class="testi-slider">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <div class="tc-stars">★★★★★</div>
+          <p>"Bill does an excellent job explaining key concepts with clear examples. As someone who speaks English as a second language, his explanations are very easy to comprehend."</p>
+          <div class="tc-author"><div class="tca-av">MR</div><div><strong>Maria R.</strong><span>Accounting Student</span></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="tc-stars">★★★★★</div>
+          <p>"Bill's lectures are short and straightforward. Real-world application of important principles makes the learning incredibly effective."</p>
+          <div class="tc-author"><div class="tca-av" style="background:#6d28d9">JT</div><div><strong>James T.</strong><span>Staff Accountant</span></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="tc-stars">★★★★★</div>
+          <p>"I completed the Controller Academy course and was promoted to Assistant Controller within six months. The templates gave me real confidence on the job."</p>
+          <div class="tc-author"><div class="tca-av" style="background:#0ea572">SK</div><div><strong>Sarah K.</strong><span>Assistant Controller</span></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="tc-stars">★★★★★</div>
+          <p>"Finally a course that teaches you what controllers actually do. Worth every penny. I've taken CPA review courses that weren't this practical."</p>
+          <div class="tc-author"><div class="tca-av" style="background:#f59e0b">DM</div><div><strong>David M.</strong><span>Senior Accountant</span></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="tc-stars">★★★★★</div>
+          <p>"The Excel templates alone are worth the price. I use them every single month-end close since completing the program. Highly recommend."</p>
+          <div class="tc-author"><div class="tca-av" style="background:#ef4444">AL</div><div><strong>Amanda L.</strong><span>Corporate Controller</span></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="tc-stars">★★★★★</div>
+          <p>"As a business owner who needed to understand my finance team better, this course was exactly what I needed. Clear, concise, and practical."</p>
+          <div class="tc-author"><div class="tca-av" style="background:#06b6d4">PO</div><div><strong>Patrick O.</strong><span>Business Owner</span></div></div>
+        </div>
+      </div>
+      <div class="testi-nav">
+        <button class="tn-btn" id="tPrev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="tn-dots" id="tnDots"></div>
+        <button class="tn-btn" id="tNext"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== NEWS ======== -->
+<section class="section news-section" id="news">
+  <div class="container">
+    <div class="news-hd">
+      <div>
+        <div class="stag">News &amp; Insights</div>
+        <h2 class="stitle">Latest from Controller Academy</h2>
+      </div>
+      <a href="https://controller-academy.com/blog/5-lucrative-accounting-exit-opportunities-from-public-accounting" target="_blank" class="btn btn-outline-dark">View All Articles</a>
+    </div>
+    <div class="news-grid">
+      <div class="news-card news-featured reveal-left">
+        <div class="nc-img" style="background:linear-gradient(135deg,#1a3a8f,#6d28d9)">
+          <div class="nc-img-content">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+        </div>
+        <div class="nc-body">
+          <div class="nc-tag">Career</div>
+          <h3>5 Lucrative Accounting Exit Opportunities From Public Accounting</h3>
+          <p>Looking to leave public accounting? Here are five high-paying finance roles that your public accounting experience perfectly positions you for.</p>
+          <div class="nc-meta"><span>March 2026</span><span>5 min read</span></div>
+          <a href="https://controller-academy.com/blog/5-lucrative-accounting-exit-opportunities-from-public-accounting" target="_blank" class="nc-link">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="news-side">
+        <div class="news-card-sm reveal-right delay-1">
+          <div class="ncs-img" style="background:#f59e0b20">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="ncs-body">
+            <div class="nc-tag" style="color:#f59e0b">Finance</div>
+            <h4>Accountant or Bookkeeper? Discover the Path to a High Six-Figure Income</h4>
+            <div class="nc-meta"><span>Feb 2026</span><span>4 min read</span></div>
+            <a href="https://controller-academy.com/blog/accountant-or-bookkeeper-discover-the-path-to-a-high-six-figure-income" target="_blank" class="nc-link-sm">Read →</a>
+          </div>
+        </div>
+        <div class="news-card-sm reveal-right delay-2">
+          <div class="ncs-img" style="background:#ef444420">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="ncs-body">
+            <div class="nc-tag" style="color:#ef4444">KPIs</div>
+            <h4>5 Powerful KPIs That Can Reveal More About a Business Than You Think</h4>
+            <div class="nc-meta"><span>Jan 2026</span><span>6 min read</span></div>
+            <a href="https://controller-academy.com/blog/5-powerful-kpis-that-can-reveal-more-about-a-business-than-you-think" target="_blank" class="nc-link-sm">Read →</a>
+          </div>
+        </div>
+        <div class="news-card-sm reveal-right delay-3">
+          <div class="ncs-img" style="background:#6d28d920">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="ncs-body">
+            <div class="nc-tag" style="color:#6d28d9">Machine Learning</div>
+            <h4>Machine Learning Community of Practice: What It Means for Finance Professionals</h4>
+            <div class="nc-meta"><span>Dec 2025</span><span>3 min read</span></div>
+            <a href="https://controller-academy.com/" target="_blank" class="nc-link-sm">Read →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== INCLUDE SECTION ======== -->
+<section class="include-section">
+  <div class="container">
+    <div class="section-hd reveal-up">
+      <div class="stag">Why Controller Academy</div>
+      <h2 class="stitle">Everything included.<br>No hidden costs.</h2>
+    </div>
+    <div class="include-grid">
+      <div class="inc-item reveal-up delay-1">
+        <div class="inc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4>Lifetime On-Demand Access</h4>
+        <p>Your courses never expire. Learn at your own pace, any device.</p>
+      </div>
+      <div class="inc-item reveal-up delay-2">
+        <div class="inc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></div>
+        <h4>Excel Templates Included</h4>
+        <p>Download real-world financial models built by an actual controller.</p>
+      </div>
+      <div class="inc-item reveal-up delay-3">
+        <div class="inc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea572" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>NASBA CPE Credits</h4>
+        <p>Earn CPE credits from a nationally registered NASBA sponsor.</p>
+      </div>
+      <div class="inc-item reveal-up delay-1">
+        <div class="inc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div>
+        <h4>LinkedIn PDF Certificate</h4>
+        <p>Complete a course and earn a shareable PDF certificate for LinkedIn.</p>
+      </div>
+      <div class="inc-item reveal-up delay-2">
+        <div class="inc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <h4>Annual Updates — Free</h4>
+        <p>Accounting rules change. Your courses are updated every year.</p>
+      </div>
+      <div class="inc-item reveal-up delay-3">
+        <div class="inc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>14-Day Money-Back Guarantee</h4>
+        <p>Try any course risk-free. Full refund within 14 days, no questions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CTA BANNER ======== -->
+<section class="cta-banner">
+  <div class="cta-b-bg">
+    <div class="ctab-orb ctab-orb-1"></div>
+    <div class="ctab-orb ctab-orb-2"></div>
+    <svg class="ctab-wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C480,80 960,0 1440,40 L1440,80 L0,80 Z" fill="rgba(255,255,255,0.03)"/></svg>
+  </div>
+  <div class="container cta-b-inner reveal-up">
+    <div class="ctab-text">
+      <h2>Start your career in<br><span class="h-grad-light">Corporate Finance today.</span></h2>
+      <p>Join over 10,000 accounting professionals who have already levelled up their careers with Controller Academy.</p>
+    </div>
+    <div class="ctab-actions">
+      <a href="#courses" class="btn btn-ctab-primary">Browse All Courses</a>
+      <a href="#bundles" class="btn btn-ctab-outline">View Bundles &amp; Save</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CONTACT ======== -->
+<section class="section contact-section" id="contact">
+  <div class="container contact-inner">
+    <div class="contact-left reveal-left">
+      <div class="stag">Contact Us</div>
+      <h2 class="stitle">Log a Training<br>Request</h2>
+      <p>Have questions about a course, CPE credits, team training, or billing? Fill in the form and we'll respond within one business day.</p>
+      <div class="contact-options">
+        <div class="co-item">
+          <div class="co-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a3a8f" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><strong>Headquarters</strong><br><span>Controller Academy LLC, Australia</span></div>
+        </div>
+        <div class="co-item">
+          <div class="co-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><strong>Support</strong><br><span><a href="https://controller-academy.com/about" target="_blank" style="color:#1a3a8f">Contact form at controller-academy.com</a></span></div>
+        </div>
+        <div class="co-item">
+          <div class="co-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0ea572" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div><strong>YouTube</strong><br><span><a href="https://www.youtube.com/@TheFinancialController/featured" target="_blank" style="color:#1a3a8f">@TheFinancialController</a></span></div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form reveal-right" id="contactForm">
+      <div class="cf-row">
+        <div class="cf-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John" required>
+        </div>
+        <div class="cf-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith" required>
+        </div>
+      </div>
+      <div class="cf-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@company.com" required>
+      </div>
+      <div class="cf-group">
+        <label>Organisation</label>
+        <input type="text" placeholder="Company or University">
+      </div>
+      <div class="cf-group">
+        <label>Request Type</label>
+        <select>
+          <option>Course Enquiry</option>
+          <option>CPE Credits Question</option>
+          <option>Team Training Request</option>
+          <option>Bundle Pricing</option>
+          <option>Technical Support</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="cf-group">
+        <label>Message</label>
+        <textarea rows="4" placeholder="Tell us how we can help..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary-dark btn-full">
+        Submit Request
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container footer-top-inner">
+      <div class="ft-brand">
+        <a href="#home" class="nav-logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#lg2)"/><path d="M10 28V14l10-6 10 6v14l-10 5-10-5z" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M20 14v14M14 17l6 3 6-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#1a3a8f"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs></svg>
+          </div>
+          <div class="logo-text-block">
+            <span class="logo-name">Controller Academy</span>
+            <span class="logo-sub">Finance Education</span>
+          </div>
+        </a>
+        <p>Professional accounting &amp; finance education built from real-world controller experience. NASBA Registered CPE Sponsor.</p>
+        <div class="ft-socials">
+          <a href="https://www.youtube.com/@TheFinancialController/featured" target="_blank" title="YouTube" class="ft-social">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#fff" points="9.545,15.568 15.818,12 9.545,8.432"/></svg>
+          </a>
+          <a href="https://www.instagram.com/the_financial_controller/" target="_blank" title="Instagram" class="ft-social">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/bill-hanna-cpa-7653a851/" target="_blank" title="LinkedIn" class="ft-social">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="ft-links-grid">
+        <div class="ft-col">
+          <h5>Capabilities</h5>
+          <a href="https://controller-academy.com/courses/entry-level-accountant-academy-cpe" target="_blank">Accounting Fundamentals</a>
+          <a href="https://controller-academy.com/unaccessible-old-pages-3g7ty53e4/controller-academy-program" target="_blank">Controller Program</a>
+          <a href="https://controller-academy.com/courses/tax-academy" target="_blank">Corporate Tax</a>
+          <a href="https://controller-academy.com/courses/fpa-academy" target="_blank">FP&amp;A Academy</a>
+          <a href="https://controller-academy.com/courses/learn-kpis-and-financial-metrics" target="_blank">KPIs &amp; Metrics</a>
+          <a href="https://controller-academy.com/courses/excel-academy" target="_blank">Advanced Excel</a>
+        </div>
+        <div class="ft-col">
+          <h5>Bundles</h5>
+          <a href="https://controller-academy.com/bundles/total-controller-access" target="_blank">Controller Bundle</a>
+          <a href="https://controller-academy.com/bundles/cfo-bundle" target="_blank">CFO Bundle</a>
+          <a href="https://controller-academy.com/bundles/entire-website-bundle" target="_blank">All-In-One Bundle</a>
+        </div>
+        <div class="ft-col">
+          <h5>About</h5>
+          <a href="#about">Who We Are</a>
+          <a href="https://controller-academy.com/about" target="_blank">Contact Us</a>
+          <a href="https://controller-academy.com/blog/5-lucrative-accounting-exit-opportunities-from-public-accounting" target="_blank">Blog &amp; News</a>
+          <a href="https://www.youtube.com/@TheFinancialController/featured" target="_blank">YouTube Channel</a>
+          <a href="https://www.patreon.com/TheFinController" target="_blank">Patreon</a>
+        </div>
+        <div class="ft-col">
+          <h5>Training</h5>
+          <a href="#training">Training Calendar</a>
+          <a href="#training">Live Workshops</a>
+          <a href="#contact">Team Training</a>
+          <a href="#contact">Custom Programs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span>© 2024 Controller Academy LLC. All rights reserved.</span>
+      <span class="fb-nasba">NASBA Registered CPE Sponsor · National Registry of CPE Sponsors</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
