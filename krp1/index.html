@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KR Properties — Steve Karrasch PREC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       CSS VARIABLES — mirrors fluid.glass token system
+    ═══════════════════════════════════════════════ */
+    :root {
+      --color-grey:   #212325;
+      --color-black:  #0b1012;
+      --color-cream:  #f3f0ec;
+      --color-taupe:  #d4cec6;
+      --color-white:  #ffffff;
+      --color-grey20: rgba(33,35,37,0.2);
+      --color-grey60: rgba(33,35,37,0.6);
+
+      --font-body:  'Inter', sans-serif;
+      --font-head:  'Space Grotesk', sans-serif;
+      --font-mono:  'Space Mono', monospace;
+
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+      --s: clamp(0.8rem, 1vw, 1rem);
+      --m: clamp(1.4rem, 1.8vw, 1.8rem);
+      --l: clamp(3.2rem, 5vw, 6.4rem);
+      --xl: clamp(4rem, 7vw, 9.6rem);
+
+      --inset: clamp(2rem, 4vw, 4rem);
+      --gap: 2rem;
+      --max-w: 152rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 10px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--color-black);
+      color: var(--color-cream);
+      font-family: var(--font-body);
+      font-size: 1.6rem;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    button { cursor: none; border: none; background: none; font-family: inherit; color: inherit; }
+
+    /* ═══════════════════════════════════════════════
+       CUSTOM CURSOR
+    ═══════════════════════════════════════════════ */
+    #cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 10rem; height: 4.4rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(2rem);
+      -webkit-backdrop-filter: blur(2rem);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10rem;
+      pointer-events: none;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s var(--ease), height 0.3s var(--ease), opacity 0.2s linear;
+      opacity: 0;
+    }
+    #cursor.visible { opacity: 1; }
+    #cursor.hovering { width: 14rem; height: 5.5rem; background: rgba(255,255,255,0.22); }
+    #cursor-label {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-cream);
+    }
+
+    /* ═══════════════════════════════════════════════
+       PAGE TRANSITION OVERLAY
+    ═══════════════════════════════════════════════ */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--color-black);
+      z-index: 9998;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.8s var(--ease-out);
+    }
+    #overlay.loaded { opacity: 0; }
+
+    /* ═══════════════════════════════════════════════
+       HEADER / NAV (fixed, bottom-positioned like fluid.glass)
+    ═══════════════════════════════════════════════ */
+    header {
+      position: fixed;
+      bottom: 4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 27.6rem;
+      height: 5rem;
+      padding: 0 1.8rem;
+      background: rgba(11,16,18,0.8);
+      backdrop-filter: blur(2rem);
+      -webkit-backdrop-filter: blur(2rem);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10rem;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .header-logo img {
+      width: 3rem;
+      height: 3rem;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: brightness(0) invert(1);
+    }
+    .header-logo-text {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-cream);
+    }
+
+    .header-menu-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .header-menu-btn span {
+      display: block;
+      width: 2rem;
+      height: 1.5px;
+      background: var(--color-cream);
+      transition: transform 0.3s var(--ease), opacity 0.3s;
+    }
+    .header-menu-btn.open span:nth-child(1) { transform: rotate(45deg) translate(4.7px, 4.7px); }
+    .header-menu-btn.open span:nth-child(2) { opacity: 0; }
+    .header-menu-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(4.7px, -4.7px); }
+
+    /* ═══════════════════════════════════════════════
+       FULL SCREEN MENU OVERLAY
+    ═══════════════════════════════════════════════ */
+    #menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11,16,18,0.97);
+      backdrop-filter: blur(2rem);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease);
+    }
+    #menu-overlay.open { opacity: 1; pointer-events: all; }
+    .menu-link {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 4vw, 4.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-taupe);
+      transition: color 0.3s;
+      position: relative;
+    }
+    .menu-link::after {
+      content: '';
+      position: absolute;
+      bottom: -0.3rem;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--color-cream);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+    .menu-link:hover { color: var(--color-cream); }
+    .menu-link:hover::after { transform: scaleX(1); }
+
+    /* ═══════════════════════════════════════════════
+       SECTION UTILITY
+    ═══════════════════════════════════════════════ */
+    .section {
+      padding: var(--inset);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      opacity: 0.7;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10rem;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+    }
+
+    /* ═══════════════════════════════════════════════
+       1. HERO SECTION
+    ═══════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 60rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--inset);
+      padding-bottom: clamp(8rem, 12vw, 14rem);
+    }
+
+    #hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    #hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+    }
+    #hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11,16,18,1) 0%, rgba(11,16,18,0.3) 50%, rgba(11,16,18,0.6) 100%);
+    }
+
+    #hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2.4rem;
+    }
+    .hero-dot {
+      width: 0.6rem; height: 0.6rem;
+      border-radius: 50%;
+      background: var(--color-cream);
+      opacity: 0.6;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: var(--xl);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--color-cream);
+      max-width: 80rem;
+      margin-bottom: 3.2rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--color-taupe);
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 3.2rem;
+      flex-wrap: wrap;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 2.8rem;
+      background: var(--color-cream);
+      color: var(--color-black);
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 10rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hero-cta:hover { background: white; transform: scale(1.02); }
+
+    .hero-cta-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 2.8rem;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(1rem);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--color-cream);
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 10rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hero-cta-ghost:hover { background: rgba(255,255,255,0.18); transform: scale(1.02); }
+
+    /* ═══════════════════════════════════════════════
+       2. STATS BAR
+    ═══════════════════════════════════════════════ */
+    #stats-bar {
+      background: var(--color-grey);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .stats-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3.2rem var(--inset);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--gap);
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding-right: 2rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 4vw, 4.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-cream);
+      line-height: 1;
+    }
+    .stat-desc {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      opacity: 0.6;
+    }
+
+    /* ═══════════════════════════════════════════════
+       3. PROPERTY COLLECTION (4 categories)
+    ═══════════════════════════════════════════════ */
+    #collection {
+      background: var(--color-black);
+      padding: 10rem var(--inset);
+    }
+    .collection-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .collection-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 6rem;
+      gap: 2rem;
+    }
+    .collection-title {
+      font-family: var(--font-head);
+      font-size: var(--l);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      max-width: 60rem;
+    }
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--gap);
+    }
+    .collection-card {
+      position: relative;
+      aspect-ratio: 500/617;
+      overflow: hidden;
+      border-radius: 0.8rem;
+      background: var(--color-grey);
+    }
+    .collection-card img {
+      transition: transform 0.6s var(--ease), opacity 0.4s;
+      opacity: 0.8;
+    }
+    .collection-card:hover img { transform: scale(1.04); opacity: 1; }
+    .collection-card-info {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.4rem;
+      background: linear-gradient(to top, rgba(11,16,18,0.9) 0%, transparent 60%);
+    }
+    .collection-card-type {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      margin-bottom: 0.8rem;
+    }
+    .collection-card-title {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .collection-card-count {
+      margin-top: 0.8rem;
+      font-size: 1.2rem;
+      opacity: 0.6;
+    }
+
+    /* ═══════════════════════════════════════════════
+       4. SHOWROOM (Agent + Featured Listing)
+    ═══════════════════════════════════════════════ */
+    #showroom {
+      background: var(--color-grey);
+      padding: 0;
+      overflow: hidden;
+    }
+    .showroom-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70rem;
+    }
+    .showroom-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .showroom-img img { height: 100%; }
+    .showroom-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--color-grey));
+    }
+    .showroom-content {
+      padding: 8rem var(--inset);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.4rem;
+    }
+    .showroom-content .label { margin-bottom: 0; }
+    .showroom-heading {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 4vw, 5.2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+    }
+    .showroom-body {
+      font-size: 1.6rem;
+      line-height: 1.7;
+      color: var(--color-taupe);
+      max-width: 44rem;
+    }
+    .showroom-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .showroom-detail-line {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      color: var(--color-taupe);
+      opacity: 0.7;
+    }
+    .btn-primary {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 2.8rem;
+      background: var(--color-cream);
+      color: var(--color-black);
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 10rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .btn-primary:hover { background: white; transform: translateY(-2px); }
+
+    /* ═══════════════════════════════════════════════
+       5. FEATURED LISTINGS
+    ═══════════════════════════════════════════════ */
+    #listings {
+      background: var(--color-black);
+      padding: 10rem var(--inset);
+    }
+    .listings-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .listings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 2.4rem;
+      margin-bottom: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .listings-title {
+      font-family: var(--font-head);
+      font-size: var(--l);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .listings-view-all {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      opacity: 0.7;
+      transition: opacity 0.3s, gap 0.3s;
+    }
+    .listings-view-all:hover { opacity: 1; gap: 1.4rem; }
+
+    .listing-row {
+      display: grid;
+      grid-template-columns: 8rem 1fr 1fr 12rem 8rem;
+      align-items: center;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      gap: 2rem;
+      transition: background 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .listing-row::before {
+      content: '';
+      position: absolute;
+      inset: 0 -2rem;
+      background: rgba(255,255,255,0.02);
+      opacity: 0;
+      transition: opacity 0.2s;
+      border-radius: 0.4rem;
+    }
+    .listing-row:hover::before { opacity: 1; }
+    .listing-row:hover .listing-arrow { opacity: 1; transform: translateX(0.4rem); }
+
+    .listing-thumb {
+      width: 8rem;
+      height: 5.5rem;
+      border-radius: 0.4rem;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--color-grey);
+    }
+    .listing-address {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .listing-details {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .listing-price {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--color-cream);
+      text-align: right;
+    }
+    .listing-arrow {
+      text-align: right;
+      font-size: 1.8rem;
+      color: var(--color-taupe);
+      opacity: 0.4;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    /* ═══════════════════════════════════════════════
+       6. COMMUNITIES
+    ═══════════════════════════════════════════════ */
+    #communities {
+      background: var(--color-grey);
+      padding: 10rem var(--inset);
+    }
+    .communities-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .communities-header {
+      margin-bottom: 5rem;
+    }
+    .communities-title {
+      font-family: var(--font-head);
+      font-size: var(--l);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-top: 1.6rem;
+    }
+    .communities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+    .community-card {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 0.8rem;
+      background: var(--color-black);
+    }
+    .community-card img {
+      transition: transform 0.6s var(--ease), opacity 0.4s;
+      opacity: 0.7;
+    }
+    .community-card:hover img { transform: scale(1.05); opacity: 0.9; }
+    .community-card-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.4rem;
+      background: linear-gradient(to top, rgba(11,16,18,0.85) 0%, transparent 55%);
+    }
+    .community-name {
+      font-family: var(--font-head);
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .community-region {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      opacity: 0.7;
+      margin-top: 0.4rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       7. TESTIMONIALS
+    ═══════════════════════════════════════════════ */
+    #testimonials {
+      background: var(--color-black);
+      padding: 10rem var(--inset);
+      overflow: hidden;
+    }
+    .testimonials-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .testimonials-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6rem;
+    }
+    .testimonials-nav {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .t-nav-btn {
+      width: 4.8rem; height: 4.8rem;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--color-taupe);
+      transition: background 0.2s, color 0.2s;
+    }
+    .t-nav-btn:hover { background: rgba(255,255,255,0.12); color: var(--color-cream); }
+    .testimonial-block {
+      display: none;
+    }
+    .testimonial-block.active {
+      display: grid;
+      grid-template-columns: 1fr 36rem;
+      gap: 8rem;
+      align-items: center;
+    }
+    .testimonial-quote {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 3.5vw, 4.8rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--color-cream);
+    }
+    .testimonial-quote::before { content: '\201C'; color: var(--color-taupe); opacity: 0.5; }
+    .testimonial-quote::after  { content: '\201D'; color: var(--color-taupe); opacity: 0.5; }
+    .testimonial-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+    .t-stars { font-size: 2rem; letter-spacing: 0.1em; color: #e8c96e; }
+    .t-author-name {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .t-author-role {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      opacity: 0.6;
+    }
+    .t-divider {
+      width: 4rem;
+      height: 1px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ═══════════════════════════════════════════════
+       8. BLOG / INSIGHTS
+    ═══════════════════════════════════════════════ */
+    #blog {
+      background: var(--color-grey);
+      padding: 10rem var(--inset);
+    }
+    .blog-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .blog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 5rem;
+    }
+    .blog-title {
+      font-family: var(--font-head);
+      font-size: var(--l);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-top: 1.2rem;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+    .blog-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 0.8rem;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .blog-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-0.4rem); }
+    .blog-card-img {
+      aspect-ratio: 16/9;
+      background: var(--color-black);
+      overflow: hidden;
+    }
+    .blog-card-img img { opacity: 0.75; transition: opacity 0.3s, transform 0.4s; }
+    .blog-card:hover .blog-card-img img { opacity: 1; transform: scale(1.03); }
+    .blog-card-body { padding: 2.4rem; }
+    .blog-card-date {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      opacity: 0.5;
+      margin-bottom: 1rem;
+    }
+    .blog-card-title {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    /* ═══════════════════════════════════════════════
+       9. CTA SECTION
+    ═══════════════════════════════════════════════ */
+    #cta {
+      position: relative;
+      width: 100%;
+      height: 80svh;
+      min-height: 50rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #cta-bg {
+      position: absolute;
+      inset: 0;
+    }
+    #cta-bg img { opacity: 0.3; }
+    #cta-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(11,16,18,0.1) 0%, rgba(11,16,18,0.9) 100%);
+    }
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: var(--inset);
+      max-width: 80rem;
+    }
+    .cta-title {
+      font-family: var(--font-head);
+      font-size: var(--xl);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      color: var(--color-cream);
+      margin-bottom: 3.2rem;
+    }
+    .cta-sub {
+      font-size: 1.8rem;
+      color: var(--color-taupe);
+      max-width: 50rem;
+      margin: 0 auto 4rem;
+      line-height: 1.6;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 1.6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ═══════════════════════════════════════════════
+       10. FOOTER
+    ═══════════════════════════════════════════════ */
+    footer {
+      background: var(--color-grey);
+      padding: 8rem var(--inset) 4rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 6rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 4rem;
+    }
+    .footer-brand { grid-column: 1; }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+    }
+    .footer-logo-icon {
+      width: 3.6rem; height: 3.6rem;
+      background: var(--color-cream);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-black);
+    }
+    .footer-wordmark {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .footer-tagline {
+      font-size: 1.4rem;
+      color: var(--color-taupe);
+      opacity: 0.6;
+      line-height: 1.6;
+      max-width: 24rem;
+    }
+    .footer-col-title {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      opacity: 0.5;
+      margin-bottom: 1.6rem;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .footer-link {
+      font-size: 1.4rem;
+      color: var(--color-taupe);
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .footer-link:hover { opacity: 1; }
+    .footer-contact-line {
+      font-size: 1.4rem;
+      color: var(--color-taupe);
+      opacity: 0.7;
+      line-height: 1.7;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      color: var(--color-taupe);
+      opacity: 0.4;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 1.6rem;
+    }
+    .footer-social {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .footer-social:hover { opacity: 1; }
+
+    /* ═══════════════════════════════════════════════
+       GLASS PANEL (reusable)
+    ═══════════════════════════════════════════════ */
+    .glass {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(1.5rem);
+      -webkit-backdrop-filter: blur(1.5rem);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0.8rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(3rem);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .collection-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 800px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .showroom-inner { grid-template-columns: 1fr; }
+      .showroom-img { height: 40rem; }
+      .listing-row { grid-template-columns: 6rem 1fr 10rem; }
+      .listing-details, .listing-arrow { display: none; }
+      .communities-grid { grid-template-columns: repeat(2, 1fr); }
+      .blog-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .testimonial-block.active { grid-template-columns: 1fr; gap: 4rem; }
+    }
+    @media (max-width: 600px) {
+      body { cursor: auto; }
+      #cursor { display: none; }
+      .collection-grid { grid-template-columns: 1fr; }
+      .communities-grid { grid-template-columns: 1fr; }
+      header { width: calc(100% - 4rem); }
+      .stats-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE TRANSITION OVERLAY -->
+<div id="overlay"></div>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"><span id="cursor-label">View</span></div>
+
+<!-- ════════════════════════════════════════
+     HEADER
+════════════════════════════════════════ -->
+<header id="site-header">
+  <a href="#" class="header-logo">
+    <img src="https://s.realtyninja.com/static/media/med/7484_1bc93e78_Karrasch_Black_and_Blue_PNG.png?width=182&dpr=2" alt="KR Properties" />
+    <span class="header-logo-text">KR Properties</span>
+  </a>
+  <button class="header-menu-btn" id="menu-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- FULL SCREEN MENU -->
+<div id="menu-overlay">
+  <a href="#listings"  class="menu-link" data-label="Browse">Properties</a>
+  <a href="#communities" class="menu-link" data-label="Explore">Communities</a>
+  <a href="#showroom" class="menu-link" data-label="Meet">The Agent</a>
+  <a href="#testimonials" class="menu-link" data-label="Read">Testimonials</a>
+  <a href="#blog"     class="menu-link" data-label="Read">Insights</a>
+  <a href="https://calendly.com/stevekarrasch" target="_blank" class="menu-link" data-label="Book">Contact Us</a>
+</div>
+
+<!-- ════════════════════════════════════════
+     1. HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <div id="hero-bg">
+    <img
+      src="https://s.realtyninja.com/static/media/med/7484_be6ad360_Home_Web_.jpg"
+      alt="KR Properties Hero"
+      loading="eager"
+    />
+  </div>
+  <div id="hero-content" class="reveal">
+    <div class="hero-eyebrow">
+      <div class="hero-dot"></div>
+      <span class="label">Surrey · Langley · White Rock · Delta</span>
+    </div>
+    <h1 class="hero-title">
+      Find Your<br/>
+      <em>Perfect</em><br/>
+      Property.
+    </h1>
+    <div class="hero-meta">
+      <a href="https://calendly.com/stevekarrasch" target="_blank" class="hero-cta" data-cursor="Book">
+        Book a Consultation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#listings" class="hero-cta-ghost" data-cursor="View">
+        View Listings
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     2. STATS BAR
+════════════════════════════════════════ -->
+<div id="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <span class="stat-number">14+</span>
+      <span class="stat-desc">Active Listings</span>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.1s">
+      <span class="stat-number">Surrey, BC</span>
+      <span class="stat-desc">Primary Market</span>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.2s">
+      <span class="stat-number">PREC</span>
+      <span class="stat-desc">Steve Karrasch</span>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.3s">
+      <span class="stat-number">604.549.5828</span>
+      <span class="stat-desc">Direct Line</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     3. PROPERTY COLLECTION
+════════════════════════════════════════ -->
+<section id="collection">
+  <div class="collection-inner">
+    <div class="collection-header reveal">
+      <h2 class="collection-title">Property<br/>Categories</h2>
+      <a href="#listings" class="listings-view-all" data-cursor="View">
+        All listings
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="collection-grid">
+      <div class="collection-card reveal" data-cursor="Browse">
+        <img src="https://s.realtyninja.com/static/images/listings/med/7484_263119815_1_967897ae.jpg?width=735" alt="Apartments" loading="lazy" />
+        <div class="collection-card-info">
+          <span class="collection-card-type">Category</span>
+          <span class="collection-card-title">Apartments &amp; Condos</span>
+          <span class="collection-card-count">5 listings from $437K</span>
+        </div>
+      </div>
+      <div class="collection-card reveal" style="transition-delay:0.1s" data-cursor="Browse">
+        <img src="https://s.realtyninja.com/static/images/listings/med/7484_263119527_1_c6b753b2.jpg?width=735" alt="Townhouses" loading="lazy" />
+        <div class="collection-card-info">
+          <span class="collection-card-type">Category</span>
+          <span class="collection-card-title">Townhouses</span>
+          <span class="collection-card-count">6 listings from $478K</span>
+        </div>
+      </div>
+      <div class="collection-card reveal" style="transition-delay:0.2s" data-cursor="Browse">
+        <img src="https://s.realtyninja.com/static/images/listings/med/7484_263089892_1_f1c1187b.jpg?width=735" alt="Residences" loading="lazy" />
+        <div class="collection-card-info">
+          <span class="collection-card-type">Category</span>
+          <span class="collection-card-title">Detached Homes</span>
+          <span class="collection-card-count">3 listings from $964K</span>
+        </div>
+      </div>
+      <div class="collection-card reveal" style="transition-delay:0.3s" data-cursor="Browse">
+        <img src="https://s.realtyninja.com/static/media/med/7484_3dbfaa98_surrey.jpg" alt="Luxury" loading="lazy" />
+        <div class="collection-card-info">
+          <span class="collection-card-type">Category</span>
+          <span class="collection-card-title">Luxury &amp; Investment</span>
+          <span class="collection-card-count">From $2.95M</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     4. SHOWROOM (Agent Profile)
+════════════════════════════════════════ -->
+<section id="showroom">
+  <div class="showroom-inner">
+    <div class="showroom-img">
+      <img
+        src="https://s.realtyninja.com/static/images/listings/med/7484_263051667_1_d8f66bce.jpg?width=735"
+        alt="Featured Property"
+        loading="lazy"
+      />
+    </div>
+    <div class="showroom-content reveal">
+      <span class="label">Meet Your Agent</span>
+      <h2 class="showroom-heading">Steve Karrasch,<br/>PREC</h2>
+      <p class="showroom-body">
+        With deep roots in the Metro Vancouver real estate market, Steve brings unmatched expertise in Surrey, Langley, North Delta, and South Surrey/White Rock. His commitment to clarity, quality, and collaboration sets every transaction apart.
+      </p>
+      <div class="showroom-detail">
+        <span class="showroom-detail-line">Macdonald Realty</span>
+        <span class="showroom-detail-line">#100 — 2429 152 St, Surrey, BC V4P 1N4</span>
+        <span class="showroom-detail-line">604-549-5828 · steve@krproperties.ca</span>
+      </div>
+      <a href="https://calendly.com/stevekarrasch" target="_blank" class="btn-primary" data-cursor="Book">
+        Schedule a Meeting
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     5. FEATURED LISTINGS
+════════════════════════════════════════ -->
+<section id="listings">
+  <div class="listings-inner">
+    <div class="listings-header reveal">
+      <h2 class="listings-title">Featured<br/>Listings</h2>
+      <a href="https://www.krproperties.ca/" target="_blank" class="listings-view-all" data-cursor="View">
+        View all on MLS
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Listing rows -->
+    <div class="listing-row reveal" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263119815_1_967897ae.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">405 – 10455 University Drive</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Surrey, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">2 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">880 sqft</span>
+        <span class="tag">Apartment</span>
+      </div>
+      <div class="listing-price">$518,785</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.05s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263119527_1_c6b753b2.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">22 – 7088 191 Street</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Surrey, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">2 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">1,257 sqft</span>
+        <span class="tag">Townhouse</span>
+      </div>
+      <div class="listing-price">$689,785</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.1s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263119270_1_b367b7c8.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">13280 81a Avenue</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Surrey, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">4 bed</span>
+        <span class="tag">3 bath</span>
+        <span class="tag">2,253 sqft</span>
+        <span class="tag">Detached</span>
+      </div>
+      <div class="listing-price">$1,100,000</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.15s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263115363_1_af9bbe11.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">5 – 14355 62 Avenue</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Surrey, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">4 bed</span>
+        <span class="tag">4 bath</span>
+        <span class="tag">1,942 sqft</span>
+        <span class="tag">Townhouse</span>
+      </div>
+      <div class="listing-price">$917,500</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.2s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263115914_1_57dae75f.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">133 – 1450 Mccallum Road</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Abbotsford, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">2 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">1,285 sqft</span>
+        <span class="tag">Townhouse</span>
+      </div>
+      <div class="listing-price">$478,785</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.25s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263115802_1_2c5cfabe.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">1001 – 11881 88 Avenue</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Delta, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">2 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">1,167 sqft</span>
+        <span class="tag">Apartment</span>
+      </div>
+      <div class="listing-price">$499,900</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.3s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263116766_1_e548e136.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">9 – 6712 Baker Road</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Delta, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">3 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">1,291 sqft</span>
+        <span class="tag">Townhouse</span>
+      </div>
+      <div class="listing-price">$729,785</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.35s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263111907_1_0c9e37f4.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">203 – 1378 Fir Street</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">White Rock, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">2 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">1,330 sqft</span>
+        <span class="tag">Apartment</span>
+      </div>
+      <div class="listing-price">$539,785</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.4s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263110072_1_9f346906.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">214 – 5655 210a Street</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Langley, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">1 bed</span>
+        <span class="tag">1 bath</span>
+        <span class="tag">708 sqft</span>
+        <span class="tag">Apartment</span>
+      </div>
+      <div class="listing-price">$437,900</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.45s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263109856_1_bece0493.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">54 – 6712 Baker Road</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Delta, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">3 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">1,361 sqft</span>
+        <span class="tag">Townhouse</span>
+      </div>
+      <div class="listing-price">$698,998</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.5s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263107078_1_df2b6553.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">86 – 13880 74 Avenue</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Surrey, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">3 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">1,317 sqft</span>
+        <span class="tag">Townhouse</span>
+      </div>
+      <div class="listing-price">$599,785</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.55s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263101082_1_123056d3.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">7492 Broadway</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Burnaby, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">4 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">2,103 sqft</span>
+        <span class="tag">Detached</span>
+      </div>
+      <div class="listing-price">$2,950,000</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.6s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263089892_1_f1c1187b.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">104 – 12155 75a Avenue</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Surrey, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">2 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">1,367 sqft</span>
+        <span class="tag">Apartment</span>
+      </div>
+      <div class="listing-price">$594,785</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+    <div class="listing-row reveal" style="transition-delay:0.65s" data-cursor="View">
+      <div class="listing-thumb"><img src="https://s.realtyninja.com/static/images/listings/med/7484_263051667_1_d8f66bce.jpg?width=735" alt="" loading="lazy"/></div>
+      <div>
+        <div class="listing-address">9678 Princess Drive</div>
+        <div style="font-size:1.2rem;color:var(--color-taupe);opacity:0.6;margin-top:0.3rem">Surrey, BC</div>
+      </div>
+      <div class="listing-details">
+        <span class="tag">5 bed</span>
+        <span class="tag">2 bath</span>
+        <span class="tag">2,200 sqft</span>
+        <span class="tag">Detached</span>
+      </div>
+      <div class="listing-price">$964,500</div>
+      <div class="listing-arrow">→</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     6. COMMUNITIES
+════════════════════════════════════════ -->
+<section id="communities">
+  <div class="communities-inner">
+    <div class="communities-header reveal">
+      <span class="label">Areas We Serve</span>
+      <h2 class="communities-title">Communities</h2>
+    </div>
+    <div class="communities-grid">
+      <div class="community-card reveal" data-cursor="Explore">
+        <img src="https://s.realtyninja.com/static/media/med/7484_3dbfaa98_surrey.jpg" alt="Surrey" loading="lazy"/>
+        <div class="community-card-label">
+          <span class="community-name">Surrey</span>
+          <span class="community-region">Metro Vancouver · BC</span>
+        </div>
+      </div>
+      <div class="community-card reveal" style="transition-delay:0.1s" data-cursor="Explore">
+        <img src="https://s.realtyninja.com/static/media/med/7484_fb099a5f_c.jpg" alt="Cloverdale" loading="lazy"/>
+        <div class="community-card-label">
+          <span class="community-name">Cloverdale</span>
+          <span class="community-region">Surrey · BC</span>
+        </div>
+      </div>
+      <div class="community-card reveal" style="transition-delay:0.2s" data-cursor="Explore">
+        <img src="https://s.realtyninja.com/static/media/med/7484_b23a9886_1.jpg" alt="Langley" loading="lazy"/>
+        <div class="community-card-label">
+          <span class="community-name">Langley</span>
+          <span class="community-region">Fraser Valley · BC</span>
+        </div>
+      </div>
+      <div class="community-card reveal" style="transition-delay:0.3s" data-cursor="Explore">
+        <img src="https://s.realtyninja.com/static/media/med/7484_28017793_1.jpg" alt="North Delta" loading="lazy"/>
+        <div class="community-card-label">
+          <span class="community-name">North Delta</span>
+          <span class="community-region">Delta · BC</span>
+        </div>
+      </div>
+      <div class="community-card reveal" style="transition-delay:0.4s" data-cursor="Explore">
+        <img src="https://s.realtyninja.com/static/media/med/7484_4a764fa6_2.jpg" alt="South Surrey" loading="lazy"/>
+        <div class="community-card-label">
+          <span class="community-name">South Surrey</span>
+          <span class="community-region">Surrey · BC</span>
+        </div>
+      </div>
+      <div class="community-card reveal" style="transition-delay:0.5s" data-cursor="Explore">
+        <img src="https://s.realtyninja.com/static/media/med/7484_7b795147_mls.jpg" alt="White Rock" loading="lazy"/>
+        <div class="community-card-label">
+          <span class="community-name">White Rock</span>
+          <span class="community-region">South Surrey · BC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     7. TESTIMONIALS
+════════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header reveal">
+      <div>
+        <span class="label">Client Reviews</span>
+        <h2 class="blog-title" style="margin-top:1.2rem">What Clients Say</h2>
+      </div>
+      <div class="testimonials-nav">
+        <button class="t-nav-btn" id="t-prev" aria-label="Previous">←</button>
+        <button class="t-nav-btn" id="t-next" aria-label="Next">→</button>
+      </div>
+    </div>
+
+    <div class="testimonial-block active" id="t0">
+      <blockquote class="testimonial-quote">
+        Steve made the entire home buying process seamless. His knowledge of Surrey and surrounding communities is second to none.
+      </blockquote>
+      <div class="testimonial-meta">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-divider"></div>
+        <div class="t-author-name">Happy Buyer</div>
+        <div class="t-author-role">Surrey, BC — Purchased 2025</div>
+      </div>
+    </div>
+
+    <div class="testimonial-block" id="t1">
+      <blockquote class="testimonial-quote">
+        We sold our Langley townhouse above asking in just 8 days. Steve's marketing strategy and negotiation skills are exceptional.
+      </blockquote>
+      <div class="testimonial-meta">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-divider"></div>
+        <div class="t-author-name">Satisfied Seller</div>
+        <div class="t-author-role">Langley, BC — Sold 2025</div>
+      </div>
+    </div>
+
+    <div class="testimonial-block" id="t2">
+      <blockquote class="testimonial-quote">
+        As first-time buyers we had so many questions. Steve was patient, thorough, and found us the perfect home in White Rock.
+      </blockquote>
+      <div class="testimonial-meta">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-divider"></div>
+        <div class="t-author-name">First-Time Buyer</div>
+        <div class="t-author-role">White Rock, BC — Purchased 2026</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     8. BLOG / INSIGHTS
+════════════════════════════════════════ -->
+<section id="blog">
+  <div class="blog-inner">
+    <div class="blog-header reveal">
+      <div>
+        <span class="label">Market Insights</span>
+        <h2 class="blog-title">Latest from<br/>The Surrey Report</h2>
+      </div>
+      <a href="https://www.krproperties.ca/" target="_blank" class="listings-view-all" data-cursor="Read">
+        All articles
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal" data-cursor="Read">
+        <div class="blog-card-img">
+          <img src="https://s.realtyninja.com/static/images/listings/med/7484_263101082_1_123056d3.jpg?width=735" alt="Blog" loading="lazy"/>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">Feb 27, 2026</div>
+          <h3 class="blog-card-title">Metro Vancouver's Real Estate Inventory Glut</h3>
+        </div>
+      </div>
+      <div class="blog-card reveal" style="transition-delay:0.1s" data-cursor="Read">
+        <div class="blog-card-img">
+          <img src="https://s.realtyninja.com/static/media/med/7484_b23a9886_1.jpg" alt="Blog" loading="lazy"/>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">Feb 25, 2026</div>
+          <h3 class="blog-card-title">5 Things You Need to Know Before Moving to Langley</h3>
+        </div>
+      </div>
+      <div class="blog-card reveal" style="transition-delay:0.2s" data-cursor="Read">
+        <div class="blog-card-img">
+          <img src="https://s.realtyninja.com/static/media/med/7484_3dbfaa98_surrey.jpg" alt="Blog" loading="lazy"/>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">Feb 24, 2026</div>
+          <h3 class="blog-card-title">It's Time to Flip the Script on Canadian Real Estate</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     9. CTA
+════════════════════════════════════════ -->
+<section id="cta">
+  <div id="cta-bg">
+    <img src="https://s.realtyninja.com/static/media/med/7484_be6ad360_Home_Web_.jpg" alt="" loading="lazy"/>
+  </div>
+  <div class="cta-content reveal">
+    <h2 class="cta-title">Ready to Find<br/>Your Home?</h2>
+    <p class="cta-sub">Book a free consultation with Steve Karrasch and take the first step toward your dream property in Metro Vancouver.</p>
+    <div class="cta-actions">
+      <a href="https://calendly.com/stevekarrasch" target="_blank" class="hero-cta" data-cursor="Book">
+        Book Now — It's Free
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:6045495828" class="hero-cta-ghost" data-cursor="Call">
+        Call 604-549-5828
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     10. FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">KR</div>
+          <span class="footer-wordmark">KR Properties</span>
+        </div>
+        <p class="footer-tagline">Clarity. Quality. Collaboration.<br/>Real estate done right in Metro Vancouver.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <div class="footer-links">
+          <a href="#listings"     class="footer-link">Properties</a>
+          <a href="#communities"  class="footer-link">Communities</a>
+          <a href="#showroom"     class="footer-link">The Agent</a>
+          <a href="#testimonials" class="footer-link">Testimonials</a>
+          <a href="#blog"         class="footer-link">Market Insights</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Communities</div>
+        <div class="footer-links">
+          <a href="https://www.krproperties.ca/" target="_blank" class="footer-link">Surrey</a>
+          <a href="https://www.krproperties.ca/" target="_blank" class="footer-link">Cloverdale</a>
+          <a href="https://www.krproperties.ca/" target="_blank" class="footer-link">Langley</a>
+          <a href="https://www.krproperties.ca/" target="_blank" class="footer-link">North Delta</a>
+          <a href="https://www.krproperties.ca/" target="_blank" class="footer-link">South Surrey</a>
+          <a href="https://www.krproperties.ca/" target="_blank" class="footer-link">White Rock</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-links">
+          <div class="footer-contact-line">Steve Karrasch, PREC</div>
+          <a href="tel:6045495828" class="footer-link">604-549-5828</a>
+          <a href="mailto:steve@krproperties.ca" class="footer-link">steve@krproperties.ca</a>
+          <div class="footer-contact-line" style="margin-top:0.8rem;font-size:1.2rem;opacity:0.5">Macdonald Realty<br/>#100 — 2429 152 St<br/>Surrey, BC V4P 1N4</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 KR Properties. Steve Karrasch, PREC. Macdonald Realty. All rights reserved.</span>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/" target="_blank" class="footer-social">Facebook</a>
+        <a href="https://www.instagram.com/" target="_blank" class="footer-social">Instagram</a>
+        <a href="https://www.youtube.com/"  target="_blank" class="footer-social">YouTube</a>
+        <a href="https://calendly.com/stevekarrasch" target="_blank" class="footer-social">Book</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+  /* ── Page transition ── */
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('overlay').classList.add('loaded'), 200);
+    setTimeout(() => document.getElementById('cursor').classList.add('visible'), 800);
+  });
+
+  /* ── Custom cursor ── */
+  const cursor = document.getElementById('cursor');
+  const cursorLabel = document.getElementById('cursor-label');
+  let mouseX = 0, mouseY = 0;
+  let curX = 0, curY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  (function animCursor() {
+    curX += (mouseX - curX) * 0.12;
+    curY += (mouseY - curY) * 0.12;
+    cursor.style.left = curX + 'px';
+    cursor.style.top  = curY + 'px';
+    requestAnimationFrame(animCursor);
+  })();
+
+  document.querySelectorAll('[data-cursor]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('hovering');
+      cursorLabel.textContent = el.dataset.cursor;
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('hovering');
+      cursorLabel.textContent = 'View';
+    });
+  });
+
+  /* ── Menu toggle ── */
+  const menuBtn = document.getElementById('menu-btn');
+  const menuOverlay = document.getElementById('menu-overlay');
+  let menuOpen = false;
+
+  menuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    menuBtn.classList.toggle('open', menuOpen);
+    menuOverlay.classList.toggle('open', menuOpen);
+  });
+
+  menuOverlay.querySelectorAll('.menu-link').forEach(link => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      menuBtn.classList.remove('open');
+      menuOverlay.classList.remove('open');
+    });
+  });
+
+  /* ── Scroll reveal ── */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── Testimonial carousel ── */
+  const testimonials = document.querySelectorAll('.testimonial-block');
+  let currentT = 0;
+
+  function showTestimonial(idx) {
+    testimonials.forEach((t, i) => t.classList.toggle('active', i === idx));
+  }
+
+  document.getElementById('t-next').addEventListener('click', () => {
+    currentT = (currentT + 1) % testimonials.length;
+    showTestimonial(currentT);
+  });
+  document.getElementById('t-prev').addEventListener('click', () => {
+    currentT = (currentT - 1 + testimonials.length) % testimonials.length;
+    showTestimonial(currentT);
+  });
+
+  /* ── Smooth-scroll nav links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* ── Header scroll behavior ── */
+  const header = document.getElementById('site-header');
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    header.style.opacity = y > 80 ? '1' : '1';
+    lastY = y;
+  }, { passive: true });
+</script>
+</body>
+</html>
