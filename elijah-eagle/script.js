@@ -185,9 +185,30 @@ function updateHeroScroll() {
   }
 }
 
-window.addEventListener('scroll', updateHeroScroll, { passive: true });
-window.addEventListener('resize', updateHeroScroll,  { passive: true });
-updateHeroScroll(); // run on page load
+function resetMobileHero() {
+  if (!videoWrap || !heroText) return;
+  // Clear all JS-set inline styles so CSS media queries take full control
+  videoWrap.style.cssText = '';
+  heroText.style.opacity = '';
+  heroText.style.pointerEvents = '';
+}
+
+function onScrollOrResize() {
+  if (window.innerWidth <= 768) {
+    resetMobileHero();
+    // Still handle nav dark toggle
+    if (heroZone && nav) {
+      const pastHero = window.scrollY >= heroZone.offsetHeight;
+      nav.classList.toggle('nav-dark', pastHero);
+    }
+    return;
+  }
+  updateHeroScroll();
+}
+
+window.addEventListener('scroll', onScrollOrResize, { passive: true });
+window.addEventListener('resize', onScrollOrResize, { passive: true });
+onScrollOrResize(); // run on page load
 
 
 // =============================================
