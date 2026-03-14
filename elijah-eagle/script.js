@@ -102,6 +102,40 @@ if (muteBtn && vid) {
   });
 }
 
+// Fullscreen (mobile)
+const fsBtn  = document.getElementById('vc-fullscreen');
+const fsIcon = document.getElementById('vc-fs-icon');
+
+const SVG_FS_ENTER = `<polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>`;
+const SVG_FS_EXIT  = `<polyline points="4 14 10 14 10 20"/><polyline points="20 4 14 4 14 10"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/>`;
+
+if (fsBtn && vid) {
+  fsBtn.addEventListener('click', () => {
+    const el = videoWrap || vid;
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      // Enter fullscreen — prefer the video element on iOS (webkitEnterFullscreen)
+      if (vid.webkitEnterFullscreen) {
+        vid.webkitEnterFullscreen();
+      } else if (el.requestFullscreen) {
+        el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+  });
+
+  // Swap icon when fullscreen state changes
+  function onFsChange() {
+    const active = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    fsIcon.innerHTML = active ? SVG_FS_EXIT : SVG_FS_ENTER;
+  }
+  document.addEventListener('fullscreenchange', onFsChange);
+  document.addEventListener('webkitfullscreenchange', onFsChange);
+}
+
 
 // =============================================
 //  HERO VIDEO SCROLL EXPANSION

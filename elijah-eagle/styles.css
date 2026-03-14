@@ -376,10 +376,18 @@ img { max-width: 100%; display: block; }
   font-variant-numeric: tabular-nums;
 }
 
-/* Mobile: always show controls */
+/* Fullscreen button — hidden on desktop, shown on mobile */
+.vc-fullscreen { display: none; }
+
+/* Mobile: always show controls + show fullscreen btn */
 @media (max-width: 768px) {
   .video-player-wrap:not(:hover) .video-controls { opacity: 1; }
+  .vc-fullscreen { display: inline-flex; }
 }
+
+/* When video is in native fullscreen, collapse exit icon */
+.video-player-wrap:-webkit-full-screen .vc-fullscreen svg,
+.video-player-wrap:fullscreen .vc-fullscreen svg { opacity: 0.7; }
 
 /* Hero typography (light theme) */
 .eyebrow-dark {
