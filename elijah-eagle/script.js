@@ -193,16 +193,69 @@ function resetMobileHero() {
   heroText.style.pointerEvents = '';
 }
 
+// =============================================
+//  MOBILE VIDEO — pause/play on scroll + slide-in animation
+// =============================================
+
+let mobileVideoObserver = null;
+let mobileScrollObserver = null;
+
+function initMobileVideo() {
+  if (!videoWrap || !vid) return;
+
+  // 1. Slide-in animation when video enters view
+  videoWrap.classList.add('mobile-vid-hidden');
+
+  mobileScrollObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          videoWrap.classList.remove('mobile-vid-hidden');
+          videoWrap.classList.add('mobile-vid-visible');
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  mobileScrollObserver.observe(videoWrap);
+
+  // 2. Pause when video scrolls out of view, play when back in
+  mobileVideoObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          vid.play().catch(() => {});
+        } else {
+          if (!vid.paused) vid.pause();
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  mobileVideoObserver.observe(videoWrap);
+}
+
+function teardownMobileVideo() {
+  if (mobileScrollObserver) { mobileScrollObserver.disconnect(); mobileScrollObserver = null; }
+  if (mobileVideoObserver)  { mobileVideoObserver.disconnect();  mobileVideoObserver  = null; }
+  if (videoWrap) {
+    videoWrap.classList.remove('mobile-vid-hidden', 'mobile-vid-visible');
+  }
+}
+
 function onScrollOrResize() {
   if (window.innerWidth <= 768) {
     resetMobileHero();
-    // Still handle nav dark toggle
+    if (!mobileVideoObserver) initMobileVideo();
+    // Nav dark toggle
     if (heroZone && nav) {
       const pastHero = window.scrollY >= heroZone.offsetHeight;
       nav.classList.toggle('nav-dark', pastHero);
     }
     return;
   }
+  // Desktop: tear down mobile observers if they exist
+  teardownMobileVideo();
   updateHeroScroll();
 }
 

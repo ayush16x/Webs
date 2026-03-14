@@ -489,6 +489,18 @@ img { max-width: 100%; display: block; }
   /* Always show controls on mobile */
   .video-controls { opacity: 1 !important; }
   .hero-title-split { font-size: clamp(2rem, 9vw, 3rem); }
+
+  /* Mobile video slide-in animation */
+  .mobile-vid-hidden {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .mobile-vid-visible {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+  }
 }
 
 /* ---- BANNER ---- */
