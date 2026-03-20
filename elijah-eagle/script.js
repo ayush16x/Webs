@@ -148,62 +148,11 @@ const videoWrap = document.getElementById('video-player-wrap');
 const heroText  = document.getElementById('hero-text-col');
 const vcControls = document.getElementById('video-controls');
 
-function clamp(min, val, max) { return Math.max(min, Math.min(max, val)); }
-function lerp(a, b, t)         { return a + (b - a) * t; }
-
-// Ease-in-out for smoother expansion
-function easeInOut(t) {
-  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-}
-
 function updateHeroScroll() {
-  if (!heroZone || !videoWrap || !heroText || !heroSticky) return;
+  if (!heroZone || !nav) return;
 
   const scrollTop  = window.scrollY;
-  const zoneTop    = heroZone.offsetTop;
   const zoneHeight = heroZone.offsetHeight;
-  const vw         = window.innerWidth;
-  const vh         = window.innerHeight;
-
-  const scrollInZone = scrollTop - zoneTop;
-  const animRange    = zoneHeight - vh;
-  const rawProgress  = clamp(0, scrollInZone / animRange, 1);
-  const progress     = easeInOut(rawProgress);
-
-  if (vw > 768) {
-    const sw = heroSticky.offsetWidth;
-    const sh = heroSticky.offsetHeight;
-
-    // Initial landscape card dimensions (16:9)
-    const margin    = clamp(24, sw * 0.03, 48);
-    const initW     = sw * 0.5 - margin * 2;
-    const initH     = initW * (9 / 16);          // true 16:9 landscape
-    const initTop   = (sh - initH) / 2;           // vertically centred
-    const initLeft  = sw * 0.5 + margin;          // starts in right half
-
-    // Final state: cover entire sticky container
-    const finalW = sw;
-    const finalH = sh;
-
-    const curTop    = lerp(initTop,   0,      progress);
-    const curLeft   = lerp(initLeft,  0,      progress);
-    const curWidth  = lerp(initW,     finalW, progress);
-    const curHeight = lerp(initH,     finalH, progress);
-    const radius    = lerp(16,        0,      progress);
-
-    videoWrap.style.top          = curTop    + 'px';
-    videoWrap.style.left         = curLeft   + 'px';
-    videoWrap.style.width        = curWidth  + 'px';
-    videoWrap.style.height       = curHeight + 'px';
-    videoWrap.style.borderRadius = radius    + 'px';
-
-    // Fade text out during first 40% of scroll
-    heroText.style.opacity = clamp(0, 1 - rawProgress / 0.4, 1).toFixed(3);
-    // Block pointer-events on text once expansion begins so video controls are always clickable
-    heroText.style.pointerEvents = rawProgress > 0.05 ? 'none' : '';
-    // Clear any inline opacity on controls — let CSS :hover rule handle visibility
-    if (vcControls) vcControls.style.opacity = '';
-  }
 
   // Nav: light by default, switch to dark once past the hero zone
   const pastHero = scrollTop >= zoneHeight;
@@ -217,14 +166,6 @@ function updateHeroScroll() {
       if (vid.paused) vid.play().catch(() => {});
     }
   }
-}
-
-function resetMobileHero() {
-  if (!videoWrap || !heroText) return;
-  // Clear all JS-set inline styles so CSS media queries take full control
-  videoWrap.style.cssText = '';
-  heroText.style.opacity = '';
-  heroText.style.pointerEvents = '';
 }
 
 // =============================================
@@ -279,7 +220,6 @@ function teardownMobileVideo() {
 
 function onScrollOrResize() {
   if (window.innerWidth <= 768) {
-    resetMobileHero();
     if (!mobileVideoObserver) initMobileVideo();
     // Nav dark toggle
     if (heroZone && nav) {

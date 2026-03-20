@@ -229,11 +229,11 @@ img { max-width: 100%; display: block; }
 /* ---- HERO SPLIT ---- */
 .hero-scroll-zone {
   position: relative;
-  height: 300vh;
+  height: 100vh;
 }
 
 .hero-sticky {
-  position: sticky;
+  position: relative;
   top: 0;
   height: 100vh;
   overflow: hidden;
@@ -261,14 +261,15 @@ img { max-width: 100%; display: block; }
 
 /* ---- VIDEO PLAYER CARD ---- */
 .video-player-wrap {
-  position: absolute;
+  position: relative;
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.22);
   background: #000;
-  z-index: 3; /* above hero-text-col (z-index: 2) so controls are always clickable */
-  /* JS sets top / left / width / height on every scroll frame */
-  will-change: top, left, width, height, border-radius;
+  z-index: 3;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  align-self: center;
 }
 
 .video-player-wrap video {
